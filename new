@@ -1,4 +1,6 @@
-My new fil
 
-ye ye
-bl bl
+#!/bin/bash
+
+echo -e "line1\nline2"
+
+
