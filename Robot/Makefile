@@ -20,5 +20,3 @@ redis:
 	bash components/redis.sh;
 shipping:
 	bash components/shipping.sh;
-user:
-	bash components/user.sh;
