@@ -6,11 +6,11 @@ APPUSER=roboshop
 source components/common.sh
 
 echo -n " Configuring NodeJs:"
-curl -sL https://rpm.nodesource.com/setup_10.x  | bash --skip-broken &>> $LOGFILE 
+curl -sL https://rpm.nodesource.com/setup_10.x  | bash  &>> $LOGFILE 
 stat $?
 
 echo -n " Installing NodeJs:"
-yum install nodejs -y &>> $LOGFILE 
+yum install nodejs -y --skip-broken &>> $LOGFILE 
 stat $?
 
 id $APPUSER &>> $LOGFILE 
