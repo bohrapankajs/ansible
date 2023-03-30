@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-COMPONENTS=mongodb
+COMPONENTS=catalogue
 APPUSER=roboshop
 source components/common.sh
 
