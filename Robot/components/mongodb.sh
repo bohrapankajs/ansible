@@ -28,7 +28,7 @@ stat $?
 
 echo -n "Downloading the Schema:"
 curl -s -L -o /tmp/$COMPONENTS.zip "https://github.com/stans-robot-project/$COMPONENTS/archive/main.zip" &>> LOGFILE
-Stat $?
+stat $?
 
 cd /tmp
 echo -n "Injecting Schema:"
