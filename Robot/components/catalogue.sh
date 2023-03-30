@@ -6,7 +6,7 @@ APPUSER=roboshop
 source components/common.sh
 
 echo -n " Configuring NodeJs:"
-curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>> $LOGFILE 
+curl -sL curl -sL https://rpm.nodesource.com/setup_10.x  | bash &>> $LOGFILE 
 stat $?
 
 echo -n " Installing NodeJs:"
