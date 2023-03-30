@@ -28,8 +28,31 @@ echo -n "Unzipping $COMPONENTS:"
 unzip /tmp/catalogue.zip &>> $LOGFILE 
 stat $?
 
+
+echo -n "Cleaning up"
+rm -rf $COMPONENTS
 mv catalogue-main catalogue
 cd /home/$APPUSER/catalogue
-echo -n "Installing npm :"
+
+echo -n "Installing dependencies :"
 npm install &>> $LOGFILE 
 stat $?
+
+
+echo -n "Changing permission to $APPUSER :"
+chown -R $APPUSER:$APPUSER /home/$APPUSER/$COMPONENTS
+stat $?
+
+echo -n " Configuring $COMPONENTS service"
+sed -e -i 's/MONGO_DNSNAME/172.31.83.219/' /home/$APPUSER/$COMPONENTS/systemd.service
+mv /home/$APPUSER/$COMPONENTS/systemd.service /etc/systemd/system/$COMPONENTS.service
+stat $?
+
+
+echo -n "Starting Component Services :"
+
+systemctl daemon-reload
+systemctl start catalogue
+systemctl enable catalogue
+stat $?
+
