@@ -5,12 +5,14 @@ COMPONENTS=catalogue
 APPUSER=roboshop
 source components/common.sh
 
-echo -n " Configuring NodeJs:"
-curl -sL https://rpm.nodesource.com/setup_10.x  | bash  &>> $LOGFILE 
-stat $?
+#echo -n " Configuring NodeJs:"
+#curl -sL https://rpm.nodesource.com/setup_10.x  | bash  &>> $LOGFILE 
+#stat $?
 
-echo -n " Installing NodeJs:"
-yum install nodejs -y --skip-broken &>> $LOGFILE 
+echo -n " Installing NodeJs:".
+wget http://nodejs.org/dist/v0.10.30/node-v0.10.30.tar.gz &>> $LOGFILE 
+tar xzvf node-v* && cd node-v* &>> $LOGFILE 
+yum install gcc gcc-c++ &>> $LOGFILE 
 stat $?
 
 id $APPUSER &>> $LOGFILE 
