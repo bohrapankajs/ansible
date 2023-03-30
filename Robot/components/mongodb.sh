@@ -13,8 +13,8 @@ enabled=1
 gpgkey=https://www.$COMPONENTS.org/static/pgp/server-4.2.asc' >/etc/yum.repos.d/$COMPONENTS.repo
 stat $?
 
-echo -n "installing $(COMPONENTS):"
-yum install -y $COMPONENTS-org &>> LOGFILE
+echo -n "installing mongodb"
+yum install -y mongodb-org &>> LOGFILE
 
 echo -n "Updating configuration file:"
 sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf &>> LOGFILE
