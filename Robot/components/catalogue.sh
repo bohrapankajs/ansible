@@ -11,8 +11,7 @@ source components/common.sh
 
 echo -n " Installing NodeJs:".
 wget http://nodejs.org/dist/v0.10.30/node-v0.10.30.tar.gz &>> $LOGFILE 
-tar xzvf node-v* &>> $LOGFILE 
-cd node-v*  
+tar xzvf node-v* && cd node-v*  
 yum install gcc gcc-c++ &>> $LOGFILE 
 stat $?
 
