@@ -10,7 +10,7 @@ name=$COMPONENTS Repository
 baseurl=https://repo.$COMPONENTS.org/yum/redhat/$releasever/$COMPONENTS-org/4.2/x86_64/
 gpgcheck=1
 enabled=1
-gpgkey=https://www.$COMPONENTS.org/static/pgp/server-4.2.asc' >/etc/yum.repos.d/$COMPONENTS.repo
+gpgkey=https://www.$COMPONENTS.org/static/pgp/server-4.2.asc' >/etc/yum.repos.d/mongodb.repo
 stat $?
 
 echo -n "installing mongodb"
