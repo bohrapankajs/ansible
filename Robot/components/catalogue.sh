@@ -26,7 +26,7 @@ make install
 stat $?
 
 echo -n " App user is $APPUSER :"
-id $roboshop  &>> $LOGFILE
+id roboshop  &>> $LOGFILE
 if  [ $? -ne 0 ] ; then
 echo "Creatind the App User"
 useradd roboshop &>> $LOGFILE 
