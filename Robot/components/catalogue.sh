@@ -18,11 +18,11 @@ echo -n " Installing Dependancies:"
 yum install gcc gcc-c++ &>> $LOGFILE 
 stat $?
 echo -n " Configuring Dependencoes:"
-/home/centos/Shell_script/Robot/node-v0.10.30/configure 
-make
+/home/centos/Shell_script/Robot/node-v0.10.30/configure  
+
 stat $?
 echo -n " Installing Nodejs:"
-make install 
+ 
 stat $?
 
 id $APPUSER &>> $LOGFILE 
