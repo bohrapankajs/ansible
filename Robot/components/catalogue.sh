@@ -1,30 +1,20 @@
 #!/bin/bash
 set -e
-
+source components/common.sh
 COMPONENTS=catalogue
 APPUSER=roboshop
-source components/common.sh
+
 
 
 
 echo -n " Downloading File:"
-wget http://nodejs.org/dist/v0.10.30/node-v0.10.30.tar.gz &>> $LOGFILE 
-stat $?
-echo -n " Unzip File:"
-tar xzvf node-v0.10.30.tar.gz &>> $LOGFILE
-cd node-v0.10.30
-stat $?
-echo -n " Installing Dependancies:"
-#yum install gcc gcc-c++ &>> $LOGFILE 
-stat $?
-echo -n " Configuring Dependencoes:"
-#/home/centos/Shell_script/Robot/node-v0.10.30/configure  
-#make
+curl -sL https://rpm.nodesource.com/setup_16.x | sudo bash - &>> $LOGFILE 
 stat $?
 echo -n " Installing Nodejs:"
-#make install
+yum install nodejs -y  &>> $LOGFILE 
 stat $?
 
+useradd roboshop
 #echo -n " App user is $APPUSER :"
 #useradd roboshop
 #stat $?
@@ -33,30 +23,30 @@ echo -n "Downloading the $COMPONENTS:"
 curl -s -L -o /tmp/catalogue.zip "https://github.com/stans-robot-project/catalogue/archive/main.zip" &>> $LOGFILE 
 stat $?
 
-cd /home/$APPUSER
+cd /home/$APPUSER/
 echo -n "Unzipping $COMPONENTS:"
-unzip /tmp/catalogue.zip &>> $LOGFILE 
+unzip -o /tmp/catalogue.zip &>> $LOGFILE 
 stat $?
 
 
-echo -n "Cleaning up"
+echo -n "Cleaning up:"
 rm -rf $COMPONENTS
-echo "1"
 mv catalogue-main catalogue
-echo "2"
-cd /home/$APPUSER/catalogue
+
+stat $?
 
 echo -n "Installing dependencies :"
+cd $COMPONENTS
 npm install &>> $LOGFILE 
 stat $?
 
 
 echo -n "Changing permission to $APPUSER :"
-chown -R $APPUSER:$APPUSER /home/$APPUSER/$COMPONENTS
+chown  $APPUSER:$APPUSER /home/$APPUSER/$COMPONENTS && chmod -R 775 /home/$APPUSER/$COMPONENTS
 stat $?
 
 echo -n " Configuring $COMPONENTS service"
-sed -e -i 's/MONGO_DNSNAME/172.31.83.219/' /home/$APPUSER/$COMPONENTS/systemd.service
+sed -i -e's/MONGO_DNSNAME/172.31.83.219/' /home/$APPUSER/$COMPONENTS/systemd.service
 mv /home/$APPUSER/$COMPONENTS/systemd.service /etc/systemd/system/$COMPONENTS.service
 stat $?
 
@@ -65,6 +55,6 @@ echo -n "Starting Component Services :"
 
 systemctl daemon-reload
 systemctl start catalogue
-systemctl enable catalogue
+systemctl enable catalogue &>> $LOGFILE 
 stat $?
 
