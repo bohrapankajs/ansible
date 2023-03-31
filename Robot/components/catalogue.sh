@@ -26,7 +26,7 @@ echo -n " Installing Nodejs:"
 stat $?
 
 echo -n " App user is $APPUSER :"
-id ${APPUSER}  &>> $LOGFILE
+id $roboshop  &>> $LOGFILE
 if  [ $? -ne 0 ] ; then
 echo "Creatind the App User"
 useradd roboshop &>> $LOGFILE 
