@@ -15,8 +15,8 @@ yum install nodejs -y  &>> $LOGFILE
 stat $?
 
     id $APPUSER  &>> $LOGFILE
-    if [ $? -ne 0]; then
-        echo " New User Add:"
+    if [ $? -ne 0 ]; then
+        echo -n " New User Add:"
         useradd $APPUSER
         stat $?
     fi
