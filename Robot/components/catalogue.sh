@@ -28,8 +28,7 @@ stat $?
 echo -n " App user is $APPUSER :"
 id roboshop  &>> $LOGFILE
 if  [ $? -ne 0 ] ; then
-useradd roboshop &>> $LOGFILE 
-stat $?
+echo "1"
 fi
 
 
