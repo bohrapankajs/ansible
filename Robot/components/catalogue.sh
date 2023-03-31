@@ -29,7 +29,7 @@ echo -n " App user is $APPUSER :"
 id ${APPUSER}  &>> $LOGFILE
 if  [ $? -ne 0 ] ; then
 echo "Creatind the App User"
-useradd $APPUSER &>> $LOGFILE 
+useradd roboshop &>> $LOGFILE 
 fi
 stat $?
 
