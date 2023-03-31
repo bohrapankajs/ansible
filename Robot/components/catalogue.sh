@@ -41,7 +41,9 @@ stat $?
 
 echo -n "Cleaning up"
 rm -rf $COMPONENTS
+echo "1"
 mv catalogue-main catalogue
+echo "2"
 cd /home/$APPUSER/catalogue
 
 echo -n "Installing dependencies :"
