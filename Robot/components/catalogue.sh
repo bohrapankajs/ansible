@@ -15,14 +15,14 @@ tar xzvf node-v0.10.30.tar.gz &>> $LOGFILE
 cd node-v0.10.30
 stat $?
 echo -n " Installing Dependancies:"
-yum install gcc gcc-c++ &>> $LOGFILE 
+#yum install gcc gcc-c++ &>> $LOGFILE 
 stat $?
 echo -n " Configuring Dependencoes:"
-/home/centos/Shell_script/Robot/node-v0.10.30/configure  
-make
+#/home/centos/Shell_script/Robot/node-v0.10.30/configure  
+#make
 stat $?
 echo -n " Installing Nodejs:"
-make install
+#make install
 stat $?
 
 #echo -n " App user is $APPUSER :"
