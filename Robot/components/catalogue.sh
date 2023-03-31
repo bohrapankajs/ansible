@@ -25,9 +25,9 @@ echo -n " Installing Nodejs:"
 make install
 stat $?
 
-echo -n " App user is $APPUSER :"
-useradd roboshop
-stat $?
+#echo -n " App user is $APPUSER :"
+#useradd roboshop
+#stat $?
 
 echo -n "Downloading the $COMPONENTS:"
 curl -s -L -o /tmp/catalogue.zip "https://github.com/stans-robot-project/catalogue/archive/main.zip" &>> $LOGFILE 
