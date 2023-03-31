@@ -25,11 +25,12 @@ echo -n " Installing Nodejs:"
  
 stat $?
 
-echo -n " App user is $APPUSER"
-id ${APPUSER}  
+echo -n " App user is $APPUSER :"
+id ${APPUSER}  &>> $LOGFILE
 if  [ $? -ne 0 ] ; then
 echo "Creatind the App User"
 useradd $APPUSER &>> $LOGFILE 
+fi
 stat $?
 
 echo -n "Downloading the $COMPONENTS:"
