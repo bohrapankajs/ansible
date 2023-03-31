@@ -28,10 +28,10 @@ stat $?
 echo -n " App user is $APPUSER :"
 id roboshop  &>> $LOGFILE
 if  [ $? -ne 0 ] ; then
-echo "Creatind the App User"
 useradd roboshop &>> $LOGFILE 
-fi
 stat $?
+fi
+
 
 echo -n "Downloading the $COMPONENTS:"
 curl -s -L -o /tmp/catalogue.zip "https://github.com/stans-robot-project/catalogue/archive/main.zip" &>> $LOGFILE 
