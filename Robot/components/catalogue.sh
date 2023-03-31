@@ -26,7 +26,7 @@ echo -n " Installing Nodejs:"
 stat $?
 
 id $APPUSER &>> $LOGFILE 
-if  [ $? -ne 0 ]; then
+if  [ $? -ne 0 ] ; then
 echo "Creatind the App User"
 useradd $APPUSER &>> $LOGFILE 
 stat $?
