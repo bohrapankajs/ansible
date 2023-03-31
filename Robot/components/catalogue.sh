@@ -19,10 +19,10 @@ yum install gcc gcc-c++ &>> $LOGFILE
 stat $?
 echo -n " Configuring Dependencoes:"
 /home/centos/Shell_script/Robot/node-v0.10.30/configure  
-
+make
 stat $?
 echo -n " Installing Nodejs:"
- 
+make install
 stat $?
 
 echo -n " App user is $APPUSER :"
