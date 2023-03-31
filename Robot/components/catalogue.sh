@@ -14,7 +14,13 @@ echo -n " Installing Nodejs:"
 yum install nodejs -y  &>> $LOGFILE 
 stat $?
 
-useradd roboshop
+id $APPUSER  &>> $LOGFILE
+    if [ $? -ne 0]; then
+        echo " New User Add:"
+        useradd $APPUSER
+        stat $?
+    if
+
 #echo -n " App user is $APPUSER :"
 #useradd roboshop
 #stat $?
