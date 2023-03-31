@@ -9,7 +9,7 @@ source components/common.sh
 
 echo -n " Installing NodeJs:"
 wget http://nodejs.org/dist/v0.10.30/node-v0.10.30.tar.gz &>> $LOGFILE 
-tar xzvf node-v* && cd node-v* 
+tar xzvf node-v0.10.30.tar.gz && cd node-v0.10.30
 yum install gcc gcc-c++ &>> $LOGFILE 
 /home/centos/Shell_script/Robot/node-v0.10.30/configure
 make
