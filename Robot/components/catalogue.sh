@@ -7,12 +7,21 @@ source components/common.sh
 
 
 
-echo -n " Installing NodeJs:"
+echo -n " Downloading File:"
 wget http://nodejs.org/dist/v0.10.30/node-v0.10.30.tar.gz &>> $LOGFILE 
-tar xzvf node-v0.10.30.tar.gz && cd node-v0.10.30
+stat $?
+echo -n " Unzip File:"
+tar xzvf node-v0.10.30.tar.gz &>> $LOGFILE
+cd node-v0.10.30
+stat $?
+echo -n " Installing Dependancies:"
 yum install gcc gcc-c++ &>> $LOGFILE 
-/home/centos/Shell_script/Robot/node-v0.10.30/configure
-make
+stat $?
+echo -n " Configuring Dependencoes:"
+/home/centos/Shell_script/Robot/node-v0.10.30/configure &>> $LOGFILE
+make &>> $LOGFILE
+stat $?
+echo -n " Installing Nodejs:"
 make install
 stat $?
 
