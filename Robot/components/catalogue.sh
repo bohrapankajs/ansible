@@ -5,15 +5,13 @@ COMPONENTS=catalogue
 APPUSER=roboshop
 source components/common.sh
 
-#echo -n " Configuring NodeJs:"
-#curl -sL https://rpm.nodesource.com/setup_10.x  | bash  &>> $LOGFILE 
-#stat $?
+
 
 echo -n " Installing NodeJs:"
 wget http://nodejs.org/dist/v0.10.30/node-v0.10.30.tar.gz &>> $LOGFILE 
-tar xzvf node-v* && cd node-v*  
+tar xzvf node-v* && cd node-v* 
 yum install gcc gcc-c++ &>> $LOGFILE 
-cd /home/centos/Shell_script/Robot/node-v0.10.30/configure
+/home/centos/Shell_script/Robot/node-v0.10.30/configure
 make
 make install
 stat $?
