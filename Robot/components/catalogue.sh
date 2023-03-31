@@ -26,11 +26,8 @@ make install
 stat $?
 
 echo -n " App user is $APPUSER :"
-id roboshop  &>> $LOGFILE
-if  [ $? -ne 0 ] ; then
-echo "1"
-fi
-
+useradd roboshop
+stat $?
 
 echo -n "Downloading the $COMPONENTS:"
 curl -s -L -o /tmp/catalogue.zip "https://github.com/stans-robot-project/catalogue/archive/main.zip" &>> $LOGFILE 
