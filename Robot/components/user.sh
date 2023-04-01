@@ -52,7 +52,7 @@ chown  $APPUSER:$APPUSER /home/$APPUSER/$COMPONENTS && chmod -R 775 /home/$APPUS
 stat $?
 
 echo -n " Configuring $COMPONENTS service"
-sed -i -e's/MONGO_ENDPOINT/172.31.83.219/' -e 's/REDIS_ENDPOINT/172.31.88.139/' /home/$APPUSER/$COMPONENTS/systemd.service
+sed -i -e's/MONGO_ENDPOINT/172.31.83.219/' -e 's/REDIS_ENDPOINT/172.31.93.27/' /home/$APPUSER/$COMPONENTS/systemd.service
 mv /home/$APPUSER/$COMPONENTS/systemd.service /etc/systemd/system/$COMPONENTS.service
 stat $?
 
