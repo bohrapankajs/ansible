@@ -13,8 +13,8 @@ stat $?
 echo -n " Installing Nodejs:"
 yum install nodejs -y  &>> $LOGFILE 
 stat $?
-
-    id roboshop  &>> $LOGFILE
+echo "1"
+id roboshop  &>> $LOGFILE
     x=$?
     echo -n " Value of X = $x"
     if [ x -ne 0 ]; then
