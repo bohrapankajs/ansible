@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+
 source components/common.sh
 COMPONENTS=user
 APPUSER=roboshop
@@ -13,7 +13,7 @@ stat $?
 echo -n " Installing Nodejs:"
 yum install nodejs -y  &>> $LOGFILE 
 stat $?
-echo "1"
+
 id roboshop  &>> $LOGFILE
     x=$?
     echo -n " Value of X = $x"
