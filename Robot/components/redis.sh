@@ -5,7 +5,7 @@ COMPONENTS=redis
 APPUSER=roboshop
 
 echo -n "configuring $COMPONENTS report:"
-curl -L"https://raw.githubusercontent.com/stans-robot-project/redis/main/redis.repo" -o /etc/yum.repos.d/redis.repo &>> $LOGFILE 
+curl -s -L"https://raw.githubusercontent.com/stans-robot-project/redis/main/redis.repo" -o /etc/yum.repos.d/redis.repo &>> $LOGFILE 
 stat $?
 
 echo -n "Installing $COMPONENTS:"
