@@ -11,7 +11,7 @@ cd redis-6.2.7
 stat $?
 
 echo -n "Installing $COMPONENTS:"
-yum install redis-6.2.7 -y &>> $LOGFILE
+yum install redis-* -y &>> $LOGFILE
 stat $?
 
 echo - "Whitelisting $COMPONENTS to other:"
