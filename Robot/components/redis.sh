@@ -17,7 +17,7 @@ stat $?
 
 echo - "Whitelisting $COMPONENTS to other:"
 sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/redis.conf &>> /tmp/redis.log
-sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/redis/redis.conf &>> /tmp/redis.log
+
 stat $?
 
 echo -n "Startng $COMPONENTS service:"
