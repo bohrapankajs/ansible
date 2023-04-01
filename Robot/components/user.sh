@@ -14,10 +14,10 @@ echo -n " Installing Nodejs:"
 yum install nodejs -y  &>> $LOGFILE 
 stat $?
 
-id roboshop  &>> $LOGFILE
-    x=$?
-    echo -n " Value of X = $x"
-    if [ x -ne 0 ]; then
+id $APPUSER  &>> $LOGFILE
+    
+    
+    if [ $? -ne 0 ]; then
         echo -n " New User Add:"
         useradd $APPUSER
         stat $?
@@ -26,18 +26,18 @@ id roboshop  &>> $LOGFILE
 
 
 echo -n "Downloading the $COMPONENTS:"
-curl -s -L -o /tmp/catalogue.zip "https://github.com/stans-robot-project/catalogue/archive/main.zip" &>> $LOGFILE 
+curl -s -L -o /tmp/$COMPONENTS.zip "https://github.com/stans-robot-project/$COMPONENTS/archive/main.zip" &>> $LOGFILE 
 stat $?
 
 cd /home/$APPUSER/
 echo -n "Unzipping $COMPONENTS:"
-unzip -o /tmp/catalogue.zip &>> $LOGFILE 
+unzip -o /tmp/$COMPONENTS.zip &>> $LOGFILE 
 stat $?
 
 
 echo -n "Cleaning up:"
 rm -rf $COMPONENTS
-mv catalogue-main catalogue
+mv $COMPONENTS-main $COMPONENTS
 
 stat $?
 
@@ -60,6 +60,6 @@ stat $?
 echo -n "Starting Component Services :"
 
 systemctl daemon-reload
-systemctl start catalogue
-systemctl enable catalogue &>> $LOGFILE 
+systemctl start $COMPONENTS
+systemctl enable $COMPONENTS &>> $LOGFILE 
 stat $?
