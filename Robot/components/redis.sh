@@ -1,7 +1,8 @@
 #!/bin/bash
 set -e
-source components/common.sh
+
 COMPONENTS=redis
+source components/common.sh
 APPUSER=roboshop
 
 echo -n "configuring $COMPONENTS report:"
