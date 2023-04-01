@@ -5,7 +5,9 @@ COMPONENTS=redis
 APPUSER=roboshop
 
 echo -n "configuring $COMPONENTS report:"
-curl -s -L"https://raw.githubusercontent.com/stans-robot-project/redis/main/redis.repo" -o /etc/yum.repos.d/redis.repo &>> $LOGFILE 
+wget https://download.redis.io/releases/redis-6.2.7.tar.gz &>> $LOGFILE
+tar -xvf  redis-6.2.7.tar.gz &>> $LOGFILE
+cd redis-6.2.7 
 stat $?
 
 echo -n "Installing $COMPONENTS:"
