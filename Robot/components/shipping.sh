@@ -28,7 +28,7 @@ echo -n "move Component jar file:"
 mv target/$COMPONENTS-1.0.jar $COMPONENTS.jar 
 stat $?
 
-CONFIGURE_SERVICE
+
 echo -n -e "\e[32m___________ $COMPONENTS installation completed______________\e[0m"
 
 
