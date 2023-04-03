@@ -28,14 +28,14 @@ stat $?
 echo show database | mysql -uroot -pRoboShop@1 &>> $LOGFILE
 if [ $? -ne 0 ] ; then
     echo -n "Reset root password:"
-    echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '${RoboShop@1}';" | mysql --connect-expired-password -uroot -p"${DEF_ROOT_PASSWORD}" &>> $LOGFILE
+    echo "ALTER USER 'root'@'localhost' IDENTIFIED BY 'RoboShop@1';" | mysql --connect-expired-password -uroot -p"${DEF_ROOT_PASSWORD}" &>> $LOGFILE
     stat $?
 fi
 
-echo show plugins | mysql -uroot -p${RoboShop@1} | grep validate_password; &>> $LOGFILE
+echo show plugins | mysql -uroot -pRoboShop@1 | grep validate_password; &>> $LOGFILE
 if [ $? -eq 0 ] ; then
     echo -n "Uninstalling password validate plugin:"
-    echo "uninstall plugin validate_password;" | mysql --connect-expired-password -uroot -p${RoboShop@1} &>> $LOGFILE
+    echo "uninstall plugin validate_password;" | mysql --connect-expired-password -uroot -pRoboShop@1 &>> $LOGFILE
     stat $?
 fi
 
@@ -48,7 +48,7 @@ stat $?
 
 echo -n " Injecting the $COMPENENTS schema:"
 cd /tmp/$COMPONENTS-main
-mysql -u root -p${RoboShop@1} < shipping.sql
+mysql -u root -pRoboShop@1 < shipping.sql
 stat $?
 
 echo -n -e "\e[32m___________ $COMPONENTS installation completed______________\e[0m"
