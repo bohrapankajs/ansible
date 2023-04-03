@@ -40,11 +40,13 @@ fi
 
 echo -n "downloading the $COMPONENTS schema:"
 cd /tmp
-# curl -s -L -o /tmp/mysql.zip "https://github.com/stans-robot-project/mysql/archive/main.zip"
+curl -s -L -o /tmp/mysql.zip "https://github.com/stans-robot-project/mysql/archive/main.zip"
 unzip -o $COMPONENTS.zip &>> $LOGFILE
+stat $?
 
 echo -n " Injecting the $COMPENENTS schema:"
 cd /tmp/$COMPONENTS-main
 mysql -u root -p${MYSQL_PWD} <shipping.sql
+stat $?
 
 echo -n -e "\e[32m___________ $COMPONENTS installation completed______________\e[0m"
