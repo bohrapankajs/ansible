@@ -27,7 +27,7 @@ stat $?
 echo show database | mysql -uroot -p${MYSQL_PWD} &>> $LOGFILE
 if [ $? -ne 0 ] ; then
     echo -n "Reset root password:"
-    echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_PWD}';" | mysql --connect-expired-password -uroot -p${DEF_ROOT_PASSWORD} &>> $LOGFILE
+    echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_PWD}';" | mysql --connect-expired-password -uroot -p"${DEF_ROOT_PASSWORD}" &>> $LOGFILE
     stat $?
 fi
 
@@ -47,7 +47,7 @@ stat $?
 
 echo -n " Injecting the $COMPENENTS schema:"
 cd /tmp/$COMPONENTS-main
-mysql -u root -p${MYSQL_PWD} <shipping.sql
+mysql -u root -p${MYSQL_PWD} < shipping.sql
 stat $?
 
 echo -n -e "\e[32m___________ $COMPONENTS installation completed______________\e[0m"
