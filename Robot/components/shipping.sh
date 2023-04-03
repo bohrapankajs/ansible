@@ -20,7 +20,7 @@ MAVEN
 # stat $?
 
 echo " Install Package :"
-cd $COMPENENTS
+cd /home/roboshop/$COMPONENTS
 mvn clean package &>> $LOGFILE
 stat $?
 
