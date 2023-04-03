@@ -10,7 +10,7 @@ echo -n " Install Maven:"
 
 yum install maven -y &>> $LOGFILE
 
-Stat $?
+stat $?
 
 CREAT_USER
 
