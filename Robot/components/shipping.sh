@@ -6,15 +6,9 @@ source components/common.sh
 APPUSER=roboshop
 
 
-echo -n " Install Maven:"
+MAVEN
 
-yum install maven -y &>> $LOGFILE
 
-stat $?
-
-CREAT_USER
-
-DONWLOAD_AND_EXTRACT
 # echo -n " Downloading the repo:"
 # cd /home/$APPUSER
 # curl -s -L -o /tmp/$COMPONENTS.zip "https://github.com/stans-robot-project/$COMPONENTS/archive/main.zip" &>> $LOGFILE

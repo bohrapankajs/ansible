@@ -43,6 +43,28 @@ CONFIGURE_SERVICE
 
 }
 
+MAVEN(){
+
+echo -n " Install Maven:"
+
+yum install maven -y &>> $LOGFILE
+
+stat $?
+
+#calling User creat to add user
+
+CREAT_USER
+
+
+# Download and exract 
+DONWLOAD_AND_EXTRACT
+
+#Confuring Services 
+CONFIGURE_SERVICE
+
+
+
+}
 CREAT_USER() {
 
 
