@@ -53,8 +53,13 @@ stat $?
 
 #calling User creat to add user
 
-CREAT_USER
-
+# CREAT_USER
+#  id $APPUSER  &>> $LOGFILE
+#     if [ $? -ne 0 ]; then
+        echo -n " New User Add:"
+        useradd $APPUSER
+        stat $?
+    # fi
 
 # Download and exract 
 DONWLOAD_AND_EXTRACT
