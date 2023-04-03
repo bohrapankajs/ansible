@@ -20,8 +20,9 @@ systemctl start mysqld
 stat $?
  
 echo -n "Changing the default Password:"
-DEF_ROOT_PASSWORD=$(grep 'A temporary password' /var/log/mysqld.log | awk -F ' ' '{print $NF}')
 
+DEF_ROOT_PASSWORD=$(grep 'A temporary password' /var/log/mysqld.log | awk -F ' ' '{print $NF}')
+stat $?
 
 echo show database | mysql -uroot -p${MYSQL_PWD} &>> $LOGFILE
 if [ $? -ne 0 ] ; then
