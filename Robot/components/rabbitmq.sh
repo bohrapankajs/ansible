@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-COMPONENTS=$COMPONENTS
+COMPONENTS=rabbitmq
 source components/common.sh
 APPUSER=roboshop
 
