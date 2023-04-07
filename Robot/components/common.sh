@@ -111,7 +111,7 @@ stat $?
 CONFIGURE_SERVICE() {
 
 echo -n " Configuring $COMPONENTS service"
-sed -i -e's/MONGO_DNSNAME/172.31.83.219/' -e 's/MONGO_ENDPOINT/172.31.83.219/' -e 's/CART_ENDPOINT/172.31.91.209/' -e 's/DB_HOST/172.31.83.2199/' -e 's/CATALOGUE_ENDPOINT/172.31.12.211/' -e 's/REDIS_ENDPOINT/172.31.53.189/' /home/$APPUSER/$COMPONENTS/systemd.service
+sed -i -e's/MONGO_DNSNAME/172.31.83.219/' -e 's/MONGO_ENDPOINT/172.31.83.219/' -e 's/CARTENDPOINT/172.31.91.209/' -e 's/DBHOST/172.31.83.219/' -e 's/CATALOGUE_ENDPOINT/172.31.12.211/' -e 's/REDIS_ENDPOINT/172.31.82.34/' /home/$APPUSER/$COMPONENTS/systemd.service
 mv /home/$APPUSER/$COMPONENTS/systemd.service /etc/systemd/system/$COMPONENTS.service
 stat $?
 
