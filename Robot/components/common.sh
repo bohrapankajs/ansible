@@ -116,6 +116,14 @@ DONWLOAD_AND_EXTRACT
 #Install the dependencies
 PYTHON_DEPENDECIES
 
+USERID=$(id -u roboshop)
+GROUPID=$(id -g roboshop)
+
+echo -n "Update the roboshop user and group id in payment.ini file: "
+sed -i -e "/^uid/ c uid=$USERID" -e "/^gid/ c gid=$GROUPID" 
+
+
+
 
 # COnfuguring Payment Service
 CONFIGURE_SERVICE
