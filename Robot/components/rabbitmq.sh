@@ -6,7 +6,7 @@ source components/common.sh
 APPUSER=roboshop
 
 echo -n "Erlang is a dependency which is needed for $COMPONENTS: "
-yum install https://github.com/$COMPONENTS/erlang-rpm/releases/download/v23.2.6/erlang-23.2.6-1.el7.x86_64.rpm -y &>> $LOGFILE
+yum yum install https://github.com/$COMPONENTS/erlang-rpm/releases/download/v23.2.6/erlang-23.2.6-1.el7.x86_64.rpm -y &>> $LOGFILE
 stat $?
 
 echo -n "Setup YUM repositories for $COMPONENTS: "
