@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+
 
 COMPONENTS=rabbitmq
 source components/common.sh
