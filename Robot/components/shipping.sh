@@ -19,15 +19,6 @@ MAVEN
 # mv $COMPONENTS-main $COMPONENTS
 # stat $?
 
-echo " Install Package :"
-cd /home/roboshop/$COMPONENTS
-mvn clean package &>> $LOGFILE
-stat $?
-
-echo -n "move Component jar file:"
-mv target/$COMPONENTS-1.0.jar $COMPONENTS.jar 
-stat $?
-
 
 echo -n -e "\e[32m___________ $COMPONENTS installation completed______________\e[0m"
 

@@ -67,7 +67,27 @@ DONWLOAD_AND_EXTRACT
 #Confuring Services 
 CONFIGURE_SERVICE
 
+#Install Maven
+MAVEN_INSTALL
 
+#Confuring Services 
+CONFIGURE_SERVICE
+
+
+
+}
+
+
+MAVEN_INSTALL(){
+    
+echo " Install Package :"
+cd /home/roboshop/$COMPONENTS
+mvn clean package &>> $LOGFILE
+stat $?
+
+echo -n "move Component jar file:"
+mv target/$COMPONENTS-1.0.jar $COMPONENTS.jar 
+stat $?
 
 }
 CREAT_USER() {
@@ -157,7 +177,7 @@ CONFIGURE_SERVICE() {
 echo -n " Configuring $COMPONENTS service"
 sed -i -e's/MONGO_DNSNAME/172.31.83.219/' -e 's/MONGO_ENDPOINT/172.31.83.219/' -e 's/AMQPHOST/172.31.80.205/' -e 's/CARTHOST/172.31.91.209/' -e 's/USERHOST/172.31.93.202/' -e 's/CARTENDPOINT/172.31.91.209/' -e 's/DBHOST/172.31.83.219/' -e 's/CATALOGUE_ENDPOINT/172.31.12.211/' -e 's/REDIS_ENDPOINT/172.31.82.34/' /home/$APPUSER/$COMPONENTS/systemd.service
 mv /home/$APPUSER/$COMPONENTS/systemd.service /etc/systemd/system/$COMPONENTS.service
-stat $?
+stat $?g
 
 
 echo -n "Starting Component Services :"
