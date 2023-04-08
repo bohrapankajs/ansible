@@ -35,4 +35,5 @@ systemctl start nginx  &>> $LOGFILE
 stat $?
 for COMP in catalogue user cart shipping payment ; do 
 sed -i -e '/$COMP/s/localhost/$COMP.robo.internal/' /tmp/roboshop.conf
+stat $?
 done
