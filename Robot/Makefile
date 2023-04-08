@@ -20,3 +20,6 @@ redis:
 	bash components/redis.sh;
 shipping:
 	bash components/shipping.sh;
+
+patch:
+	bash components/Patch.sh;
