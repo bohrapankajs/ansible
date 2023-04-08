@@ -70,8 +70,12 @@ CONFIGURE_SERVICE
 #Install Maven
 MAVEN_INSTALL
 
-#Confuring Services 
-CONFIGURE_SERVICE
+echo -n "Starting Component Services :"
+
+systemctl daemon-reload
+systemctl restart $COMPONENTS
+
+stat $?
 
 
 
