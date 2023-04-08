@@ -120,7 +120,7 @@ USERID=$(id -u roboshop)
 GROUPID=$(id -g roboshop)
 
 echo -n "Update the roboshop user and group id in payment.ini file: "
-sed -i -e "/^uid/ c uid=$USERID" -e "/^gid/ c gid=$GROUPID" /home/$APPUSER/payment/payment.ini
+sed -i -e "/^uid/ c uid=$USERID" -e "/^gid/ c gid=$GROUPID" /home/$APPUSER/$COMPONENTS/$COMPONENTS.ini
 stat $?
 
 
