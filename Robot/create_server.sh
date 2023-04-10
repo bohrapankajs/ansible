@@ -21,7 +21,7 @@ aws ec2 run-instances --image-id $AMI_ID --instance-type t2.micro --security-gro
 
 if [ "$1" == "all" ] ; then
     for component in frontend catalogue cart user shipping payment mongodb mysql rabbitmq redis; do
-    COMPONENT=component
+    COMPONENT=$component
     CREATE_SERVER
     echo -n " CREATED SERVER $component SUCCESSFULLY"
 done
