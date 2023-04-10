@@ -16,7 +16,7 @@ echo $COMPONENT
 
 CREATE_SERVER()
 {
-aws ec2 run-instances --image-id $AMI_ID --instance-type t2.micro --security-group-ids $SGID 
+aws ec2 run-instances --image-id $AMI_ID --instance-type t2.micro --security-group-ids $SGID | jq
 }
 
 if [ "$1" == "all" ] ; then
