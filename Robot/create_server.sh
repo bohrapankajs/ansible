@@ -1,0 +1,30 @@
+#!/bin/bash/
+
+if [ -z $1 ] ; then
+    echo "enter service name: "
+    exit
+fi
+
+COMPONENT $1
+ENV=$2
+ZONE_ID="Z00636481OT8FNJLH82AQ"
+
+AMI_ID="$(aws ec2 describe-instances | jq '.Reservations[].Instances[].ImageId' | sed -e 's/"//g')"
+SGID="$(aws ec2 describe-security-groups   --filters Name=group-name,Values=b51-allow-all | jq '.SecurityGroups[].GroupId' | sed -e 's/"//g')"
+echo "AMI ID Used to launch instance is : $AMI_ID"
+echo "SG ID Used to launch instance is : $SGID"
+echo $COMPONENT
+
+CREATE_SERVER()
+{
+aws ec2 run-instances --image-id $AMI_ID --instance-type t2.micro --count 1 --security-group-ids $SGID
+}
+
+if [ "$1" == "all" ] ; then
+    for component in frontend catalogue cart user shipping payment mongodb mysql rabbitmq redis; do
+    COMPONENT=componenet
+    CREATE_SERVER
+done
+else
+    CREATE_SERVER
+done
