@@ -27,4 +27,4 @@ if [ "$1" == "all" ] ; then
 done
 else
     CREATE_SERVER
-done
+fi
