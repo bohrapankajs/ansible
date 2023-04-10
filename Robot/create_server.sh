@@ -5,7 +5,7 @@ if [ -z $1 ] ; then
     exit
 fi
 
-COMPONENT $1
+COMPONENT=$1
 
 
 AMI_ID="$(aws ec2 describe-instances | jq '.Reservations[].Instances[].ImageId' | sed -e 's/"//g')"
