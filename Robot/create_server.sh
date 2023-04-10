@@ -6,11 +6,10 @@ if [ -z $1 ] ; then
 fi
 
 COMPONENT $1
-ENV=$2
-ZONE_ID="Z00636481OT8FNJLH82AQ"
+
 
 AMI_ID="$(aws ec2 describe-instances | jq '.Reservations[].Instances[].ImageId' | sed -e 's/"//g')"
-SGID="$(aws ec2 describe-security-groups   --filters Name=group-name,Values=b51-allow-all | jq '.SecurityGroups[].GroupId' | sed -e 's/"//g')"
+SGID="$(aws ec2 describe-security-groups   --filters Name=group-name,Values=Free-Everyone | jq '.SecurityGroups[].GroupId' | sed -e 's/"//g')"
 echo "AMI ID Used to launch instance is : $AMI_ID"
 echo "SG ID Used to launch instance is : $SGID"
 echo $COMPONENT
