@@ -5,7 +5,7 @@ if [ -z "$1" ]; then
     exit 1 
 fi 
 
-COMPONENT=$1
+COMPONENT=frontend
 echo $COMPONENT
 # ENV=$2
 ZONE_ID="Z0892453GPU3MJPYG1MJ"
