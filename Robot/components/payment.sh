@@ -1,6 +1,8 @@
-#!/bin/bash
+#!/bin/bash 
+
+COMPONENT=payment
 source components/common.sh
-COMPONENTS=payment
 APPUSER=roboshop
 PYTHON
-echo -n -e "\e[32m___________ $COMPONENTS New installation completed______________\e[0m"
+
+echo -e "\e[32m __________ $COMPONENT Installation Completed _________ \e[0m"

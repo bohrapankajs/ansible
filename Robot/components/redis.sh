@@ -1,27 +1,24 @@
-#!/bin/bash
-set -e
+#!/bin/bash 
+set -e 
 
-COMPONENTS=redis
+COMPONENT=redis
+
 source components/common.sh
-APPUSER=roboshop
 
-echo -n "configuring $COMPONENTS report:"
-wget https://download.redis.io/releases/redis-6.2.7.tar.gz &>> /tmp/redis.log
-tar -xvf  redis-6.2.7.tar.gz &>> $LOGFILE
-cd /home/centos/Shell_script/Robot/redis-6.2.7/ 
-stat $?
+echo -n "Configuring $COMPONENT repo:"
+curl -L https://raw.githubusercontent.com/stans-robot-project/redis/main/redis.repo -o /etc/yum.repos.d/redis.repo &>> $LOGFILE
+stat $? 
 
-echo -n "Installing $COMPONENTS:"
-yum install redis-* -y &>> /tmp/redis.log
-stat $?
+echo -n "Installing $COMPONENT:"
+yum install redis-6.2.7 -y  &>> $LOGFILE
+stat $? 
 
-echo - "Whitelisting $COMPONENTS to other:"
-sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/redis.conf &>> /tmp/redis.log
+echo -n "Whitelisting redis to others:"
+sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/redis/redis.conf
+stat $? 
 
-stat $?
-
-echo -n "Startng $COMPONENTS service:"
-systemctl daemon-reload
-systemctl enable redis &>> /tmp/redis.log
-systemctl start redis
-stat $?
+echo -n "Starting $COMPONENT service:"
+systemctl daemon-reload 
+systemctl enable redis 
+systemctl restart redis 
+stat $? 

@@ -1,195 +1,136 @@
+LOGFILE=/tmp/$COMPONENT.log
 
-USERID=$(id -u)
-LOGFILE=/tmp/$COMPONENTS.log
+USERID=$(id -u) 
 
-if [ $USERID -ne 0 ] ; then
-    echo -e "\e[31m Not a Root User \e[0m"
+# User Validation ; Checks whether the user is a root user or not.
+if [ $USERID -ne 0 ]  ; then 
+    echo -e "\e[31m You must run this script as a root user or with sudo privilege \e[0m"
     exit 1
-fi
+fi 
 
-stat()
-{
-    if [ $? -eq 0 ]; then
-        echo -e "\e[32m Success\e[0m"
-    else
-        echo -e "\e[31m Faillure\e[0m"
-    fi
+stat() {
+    if [ $1 -eq 0 ]; then 
+        echo -e "\e[32m Success \e[0m"
+    else 
+        echo -e "\e[31m Failure \e[0m"
+    fi 
 }
+
 
 NODEJS() {
+    echo -n "Configuring Node JS:"
+    curl --silent --location https://rpm.nodesource.com/setup_16.x | sudo bash -   &>> $LOGFILE
+    stat $? 
 
-echo -n "Configuring Node JS :"
-curl -sL https://rpm.nodesource.com/setup_16.x | sudo bash -  &>> $LOGFILE
-stat $?
-
-echo -n "Installing Node JS :"
-yum install nodejs -y &>> $LOGFILE
-stat $?
-
-
-#calling User creat to add user
-
-CREAT_USER
-
-
-# Download and exract 
-DONWLOAD_AND_EXTRACT
-
-# performing 
-NPM_INSTALL
-
-#Confuring Services 
-CONFIGURE_SERVICE
-
-}
-
-MAVEN(){
-
-echo -n " Install Maven:"
-
-yum install maven -y &>> $LOGFILE
-
-stat $?
-
-#calling User creat to add user
-
-CREAT_USER
-#  id $APPUSER  &>> $LOGFILE
-# #     if [ $? -ne 0 ]; then
-#         echo -n " New User Add:"
-#         useradd $APPUSER
-#         stat $?
- # fi
-
-# Download and exract 
-DONWLOAD_AND_EXTRACT
-
-#Confuring Services 
-CONFIGURE_SERVICE
-
-#Install Maven
-MAVEN_INSTALL
-
-echo -n "Starting Component Services :"
-
-systemctl daemon-reload
-systemctl restart $COMPONENTS
-
-stat $?
-
-
-
-}
-
-
-MAVEN_INSTALL(){
+    echo -n "Installing Nodejs: "
+    yum install nodejs -y &>> $LOGFILE
+    stat $? 
     
-echo " Install Package :"
-cd /home/roboshop/$COMPONENTS
-mvn clean package &>> $LOGFILE
-stat $?
+    # Calling create_user function
+    CREATE_USER
 
-echo -n "move Component jar file:"
-mv target/$COMPONENTS-1.0.jar $COMPONENTS.jar 
-stat $?
+    # Downloading the code
+    DOWNLOAD_AND_EXTRACT 
 
+    # Performs npm install 
+    NPM_INSTALL
+
+    # Configures Services
+    CONFIGURE_SERVICE
 }
-CREAT_USER() {
 
+MAVEN() {
+    echo -n "Installing Maven:"
+    yum install maven -y &>> $LOGFILE
+    stat $? 
 
- id $APPUSER  &>> $LOGFILE
+    # Calling create_user function
+    CREATE_USER
+
+    # Downloading the code
+    DOWNLOAD_AND_EXTRACT 
+
+    # Performs mvn install 
+    MVN_INSTALL
+
+    # Configures Services
+    CONFIGURE_SERVICE
+}
+
+PYTHON() {
+    echo -n "Installing Python3 and other dependencies:"
+    yum install python36 gcc python3-devel -y &>> $LOGFILE
+    stat $? 
+
+    # Calling create_user function
+    CREATE_USER    
+
+    # Downloading the code
+    DOWNLOAD_AND_EXTRACT 
+
+    USERID=$(id -u roboshop)
+    GROUPID=$(id -g roboshop)
+
+    cd /home/$APPUSER/$COMPONENT/
+    pip3 install -r requirements.txt &>> $LOGFILE
+    
+    echo -n "Updating the uid and gid with $APPUSER in $PAYMENT.ini : "
+    sed -i -e "/^uid/ c uid=$USERID"  -e "/^gid/ c gid=$GROUPID" /home/$APPUSER/$COMPONENT/$COMPONENT.ini 
+    stat $?
+
+    # Configures Services
+    CONFIGURE_SERVICE
+}
+
+CREATE_USER() {
+    id $APPUSER &>> $LOGFILE 
     if [ $? -ne 0 ]; then
-        echo -n " New User Add:"
-        useradd $APPUSER
+        echo -n "Creating App User:"
+        useradd $APPUSER &>> $LOGFILE
         stat $?
     fi
+} 
+
+DOWNLOAD_AND_EXTRACT() {
+    echo -n "Downloading the $COMPONENT:"
+    curl -s -L -o /tmp/$COMPONENT.zip "https://github.com/stans-robot-project/$COMPONENT/archive/main.zip"
+    stat $? 
+
+    echo -n "Performing Cleanup:"
+    rm -rf /home/$APPUSER/$COMPONENT
+    cd /home/$APPUSER/ 
+    unzip -o /tmp/$COMPONENT.zip  &>> $LOGFILE && mv $COMPONENT-main $COMPONENT  &>> $LOGFILE 
+    stat $? 
+
+    echo -n "Changing permissions to $APPUSER"
+    chown -R $APPUSER:$APPUSER /home/roboshop/$COMPONENT &&  chmod -R 775 /home/roboshop/$COMPONENT 
+    stat $?
 }
-
-DONWLOAD_AND_EXTRACT() {
-
-echo -n "Downloading the $COMPONENTS:"
-curl -s -L -o /tmp/$COMPONENTS.zip "https://github.com/stans-robot-project/$COMPONENTS/archive/main.zip" &>> $LOGFILE 
-stat $?
-
-echo -n "Cleaning /up:"
-rm -rf /home/$APPUSER/$COMPONENTS
-cd /home/$APPUSER/
-echo -n "Unzipping $COMPONENTS:"
-unzip -o /tmp/$COMPONENTS.zip &>> $LOGFILE && mv $COMPONENTS-main $COMPONENTS &>> $LOGFILE
-stat $?
-
-echo -n "Changing permission to $APPUSER :"
-chown  $APPUSER:$APPUSER /home/$APPUSER/$COMPONENTS && chmod -R 775 /home/$APPUSER/$COMPONENTS
-stat $?
-
-}
-PYTHON(){
-
-
-echo -n " installing Python:"
-yum install python36 gcc python3-devel -y &>> $LOGFILE
-stat $?
-
-# Creating User 
-
-CREAT_USER
-
-# Download the repo.
-DONWLOAD_AND_EXTRACT
-
-#Install the dependencies
-PYTHON_DEPENDECIES
-
-USERID=$(id -u roboshop)
-GROUPID=$(id -g roboshop)
-
-echo -n "Update the roboshop user and group id in payment.ini file: "
-sed -i -e "/^uid/ c uid=$USERID" -e "/^gid/ c gid=$GROUPID" /home/$APPUSER/$COMPONENTS/$COMPONENTS.ini
-stat $?
-
-
-
-# COnfuguring Payment Service
-CONFIGURE_SERVICE
-
-}
-
-PYTHON_DEPENDECIES()
-{
-
-cd /home/$APPUSER/$COMPONENTS 
-pip3 install -r requirements.txt &>> $LOGFILE
-
-
-}
-
-
-
-
-
 
 NPM_INSTALL() {
-echo -n " Installing $COMPONENTS Dependenscies:"
-cd $COMPONENTS
-npm install &>> $LOGFILE 
-stat $?
+    echo -n "Installing $COMPONENT Dependencies: "
+    cd $COMPONENT 
+    npm install &>> $LOGFILE
+    stat $?
+}
 
+MVN_INSTALL() {
+    echo -n "Installing $COMPONENT Dependencies: "
+    cd $COMPONENT 
+    mvn clean package &>> $LOGFILE
+     mv target/$COMPONENT-1.0.jar $COMPONENT.jar
+    stat $?
 }
 
 CONFIGURE_SERVICE() {
+    echo -n "Configuring $COMPONENT Service:"
+    sed -i -e 's/AMQPHOST/rabbitmq.robot.internal/' -e 's/USERHOST/user.robot.internal/' -e 's/CARTHOST/cart.robot.internal/' -e 's/DBHOST/mysql.robot.internal/' -e 's/CARTENDPOINT/cart.robot.internal/' -e 's/REDIS_ENDPOINT/redis.robot.internal/' -e 's/CATALOGUE_ENDPOINT/catalogue.robot.internal/' -e 's/MONGO_DNSNAME/mongodb.robot.internal/' -e 's/MONGO_ENDPOINT/mongodb.robot.internal/' -e 's/REDIS_ENDPOINT/redis.robot.internal/' /home/roboshop/$COMPONENT/systemd.service
+    mv /home/$APPUSER/$COMPONENT/systemd.service /etc/systemd/system/$COMPONENT.service
+    stat $? 
 
-echo -n " Configuring $COMPONENTS service"
-sed -i -e's/MONGO_DNSNAME/172.31.83.219/' -e 's/MONGO_ENDPOINT/172.31.83.219/' -e 's/AMQPHOST/172.31.80.205/' -e 's/CARTHOST/172.31.91.209/' -e 's/USERHOST/172.31.93.202/' -e 's/CARTENDPOINT/172.31.91.209/' -e 's/DBHOST/172.31.83.219/' -e 's/CATALOGUE_ENDPOINT/172.31.12.211/' -e 's/REDIS_ENDPOINT/172.31.82.34/' /home/$APPUSER/$COMPONENTS/systemd.service
-mv /home/$APPUSER/$COMPONENTS/systemd.service /etc/systemd/system/$COMPONENTS.service
-stat $?g
-
-
-echo -n "Starting Component Services :"
-
-systemctl daemon-reload
-systemctl start $COMPONENTS
-systemctl enable $COMPONENTS &>> $LOGFILE 
-stat $?
-
-
+    echo -n "Starting $COMPONENT Service:"
+    systemctl daemon-reload &>> $LOGFILE
+    systemctl enable $COMPONENT
+    systemctl restart $COMPONENT &>> $LOGFILE
+    stat $? 
 }

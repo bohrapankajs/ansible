@@ -1,40 +1,36 @@
-#!/bin/bash
-set -e
+#!/bin/bash 
+set -e 
 
-COMPONENTS=mongodb
+# Verify the script is been executed as a root user or not.
+
+COMPONENT=mongodb
+
 source components/common.sh
 
-echo -n " Downloading Configuration file:"
-echo '[${COMPONENTS}-org-4.2]
-name=${COMPONENTS} Repository
-baseurl=https://repo.${COMPONENTS}.org/yum/redhat/$releasever/${COMPONENTS}-org/4.2/x86_64/
-gpgcheck=1
-enabled=1
-gpgkey=https://www.${COMPONENTS}.org/static/pgp/server-4.2.asc' >/etc/yum.repos.d/${COMPONENTS}.repo
+echo -n "Configuring the repo:"
+curl -s -o /etc/yum.repos.d/${COMPONENT}.repo https://raw.githubusercontent.com/stans-robot-project/${COMPONENT}/main/mongo.repo
+stat $? 
+
+echo -n "Installing ${COMPONENT}:"
+yum install mongodb-org -y &>> $LOGFILE
 stat $?
 
-echo -n "installing $COMPONENTS"
-yum install -y mongodb-org &>> LOGFILE
+echo -n "Updating the mongodb config:"
+sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf 
+stat $? 
 
-echo -n "Updating configuration file:"
-sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf &>> LOGFILE
+echo -n "Strating MongoDB: "
+systemctl enable mongod &>> $LOGFILE
+systemctl start mongod &>> $LOGFILE
+
+echo -n "Downloading the $COMPONENT Schema:"
+curl -s -L -o /tmp/$COMPONENT.zip "https://github.com/stans-robot-project/mongodb/archive/main.zip" &>> $LOGFILE
+stat $? 
+
+echo -n "Injecting the schems:"
+cd /tmp 
+unzip -o  $COMPONENT.zip  &>> $LOGFILE
+cd $COMPONENT-main 
+mongo < catalogue.js &>> $LOGFILE
+mongo < users.js &>> $LOGFILE
 stat $?
-
-echo -n "Starting mongodb:"
-systemctl enable mongod
-systemctl start mongod
-stat $?
-
-
-echo -n "Downloading the Schema:"
-curl -s -L -o /tmp/$COMPONENTS.zip "https://github.com/stans-robot-project/$COMPONENTS/archive/main.zip" &>> LOGFILE
-stat $?
-
-cd /tmp
-echo -n "Injecting Schema:"
-unzip $COMPONENTS.zip &>> LOGFILE
-cd $COMPONENTS-main
-mongo < catalogue.js &>> LOGFILE
-mongo < users.js  &>> LOGFILE
-stat $?
-
