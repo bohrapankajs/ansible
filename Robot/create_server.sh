@@ -6,6 +6,7 @@ if [ -z "$1" ]; then
 fi 
 
 COMPONENT=$1
+echo $COMPONENT
 # ENV=$2
 ZONE_ID="Z0892453GPU3MJPYG1MJ"
 
