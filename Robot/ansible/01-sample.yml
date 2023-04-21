@@ -1,4 +1,4 @@
-- name: play1
+- name: Play1
   host: all
   tasks: 
       - name: print hello from task one
