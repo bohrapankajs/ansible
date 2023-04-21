@@ -1,11 +1,6 @@
 - name: Play1
-  host: all
+  hosts: all
   tasks: 
         - name: print hello from task one
           ansible.builtin.debug:
              msg: Pankaj the great
-    # - name: Get uptime information
-    #   ansible.builtin.shell: /usr/bin/uptime
-    #   register: result
-    #   ansible.builtin.debug:
-    #   msg: $result
