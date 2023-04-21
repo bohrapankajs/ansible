@@ -1,4 +1,10 @@
 - name: Play1
+  hosts: dev
+  tasks: 
+        - name: print hello from task one
+          ansible.builtin.debug:
+             msg: in Dev pankaj is great
+- name: Play1
   hosts: all
   tasks: 
         - name: print hello from task one
