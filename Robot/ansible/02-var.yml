@@ -2,6 +2,8 @@
   hosts: all
   vars:
     URL: https://www.orangecomedyclub.com/
+  vars_files:
+    - demovars.yaml
   tasks:
     - name: priting the URL
       ansible.builtin.debug:
@@ -14,5 +16,11 @@
         msg: URL is "{{ URL }}"
       vars: 
         URL: badaledo
+    - name: priting the URL with quotes
+      ansible.builtin.debug:
+        msg: URL is "{{ CLI_URL }}"
+      vars: 
+        CLI_URL: badaledona
+
 
         
