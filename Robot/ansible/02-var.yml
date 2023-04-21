@@ -1,0 +1,18 @@
+- name: Play1
+  hosts: all
+  vars:
+    URL: https://www.orangecomedyclub.com/
+  tasks:
+    - name: priting the URL
+      ansible.builtin.debug:
+        msg: URL is {{URL}}
+    - name: priting the URL with space
+      ansible.builtin.debug:
+        msg: URL is {{ URL }}
+    - name: priting the URL with quotes
+      ansible.builtin.debug:
+        msg: URL is "{{URL}}""
+      vars: 
+        URL: https://www.tasks.orangecomedyclub.com/
+
+        
