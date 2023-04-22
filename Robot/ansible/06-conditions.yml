@@ -10,9 +10,9 @@
       when: action
 
     - name: Runs when soo is defined
-      ansible.builtin.shell: echo "Hellow my name is "{{soo.stdout}}""
+      ansible.builtin.shell: echo "Hellow my name is "{{soo}}""
       when: soo is defined
-      
+
     - name: Runs when soo is undefined
       ansible.builtin.shell: echo "Hellow my name is bade and bade achhe lagte he"
       when: soo is undefined
