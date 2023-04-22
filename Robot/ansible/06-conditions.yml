@@ -1,0 +1,19 @@
+- name: Demo on conditions
+  hosts: all
+  vars: 
+    action: true
+    soo: sanjay
+  tasks: 
+    - name: Runs when os is Centos
+      ansible.builtin.debug:
+        msg: Hello Sanjay how you doing
+      when: action
+    - name: Runs when soo is defined
+      ansible.builtin.debug:
+        msg: Hellow my name is "{{soo.stdout}}"
+      when: soo is defined
+    - name: Runs when soo is defined
+      ansible.builtin.debug:
+        msg: Hellow my name is bade and bade achhe lagte he
+      when: soo is undefined
+      
