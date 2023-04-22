@@ -5,9 +5,9 @@
       ansible.builtin.shell: ps -ef | grep java | grep -v grep
       register: out
       ignore_errors: yes
-    -name: Print out
+    - name: Print out
       ansible.builtin.debug:
         msg: Start Tomcat
-    -name: Print out
+    - name: Print out
       ansible.builtin.debug:
         msg: "{{out.stdout}}"
