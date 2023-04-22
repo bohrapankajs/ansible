@@ -6,7 +6,8 @@
     #     src: inv
     #     dest: /tmp/hosts
     - name: copy file to destination
-      ansible.builtin.copy: 
-        src: https://github.com/b51-clouddevops/ansible/blob/main/10-demo-on-copy.yml
+      ansible.builtin.get_url: 
+        url: https://github.com/b51-clouddevops/ansible/blob/main/10-demo-on-copy.yml
         dest: /tmp/hosts 
-      remote_src:true 
+        mode: '0440'
+     
