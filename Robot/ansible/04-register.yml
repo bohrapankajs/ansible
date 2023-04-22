@@ -6,4 +6,4 @@
         register: sanjay
       - name: Printing Sanjay
         ansible.builtin.debug: 
-          msg: "{{sanjay.stout}}"
+          msg: "{{sanjay.stdout}}"
