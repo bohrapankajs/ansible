@@ -17,7 +17,7 @@
         msg: My id is "{{out.stdout}}"
     - name: Running a shell commmand
       ansible.builtin.shell: useradd sanjay 
-      register: out
+     
     - name: Running a shell commmand
       ansible.builtin.shell: id 
       register: out
