@@ -11,7 +11,7 @@
     - name: Running a shell commmand
       ansible.builtin.shell: id 
       register: out
-      become_user:centos
+      become_user: centos
     - name: Pritning Variable
       ansible.builtin.debug:
         msg: My id is "{{out.stdout}}"
