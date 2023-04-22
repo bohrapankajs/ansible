@@ -1,9 +1,9 @@
 - name: demo in using shell module
   hosts: all
-    tasks:
-        - name: running a shell commmand
-          ansible.builtin.shell: id 
-          register: sanjay
-        - name: Printing Sanjay
-          ansible.builtin.debug: 
-            msg: "{{sanjay.stout}}"
+  tasks:
+      - name: running a shell commmand
+        ansible.builtin.shell: id 
+        register: sanjay
+      - name: Printing Sanjay
+        ansible.builtin.debug: 
+          msg: "{{sanjay.stout}}"
