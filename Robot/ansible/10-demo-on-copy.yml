@@ -1,10 +1,10 @@
 - name: demo on copy
   hosts: all
   tasks:
-    - name: copy file to destination
-      ansible.builtin.copy: 
-        src: inv
-        dest: /tmp/hosts
+    # - name: copy file to destination
+    #   ansible.builtin.copy: 
+    #     src: inv
+    #     dest: /tmp/hosts
     - name: copy file to destination
       ansible.builtin.copy: 
         src: https://github.com/b51-clouddevops/ansible/blob/main/10-demo-on-copy.yml
