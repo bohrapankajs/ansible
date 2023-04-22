@@ -1,0 +1,13 @@
+- name: loops for Ansible 
+  hosts: all
+  tasks:
+    - name: printing Devops tools
+      ansible.builtin.debug:
+        msg: Devops tools are {{item}}
+      loop:
+        - ansible 
+        - chef
+        - jenkins
+        - terraform
+        - kubernetis
+        
