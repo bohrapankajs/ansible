@@ -1,13 +1,13 @@
-- name: check tomcat is running or not
+- name: check xenbus is running or not
   hosts: all
   tasks: 
-    - name: check tomcat is running or not
-      ansible.builtin.shell: ps -ef | grep java | grep -v grep
+    - name: check xenbus is running or not
+      ansible.builtin.shell: ps -ef | grep xenbus | grep -v grep
       register: out
       ignore_errors: yes
     - name: Print out
       ansible.builtin.debug:
-        msg: Start Tomcat
+        msg: Start xenbus
     - name: Print out
       ansible.builtin.debug:
         msg: "{{out.stdout}}"
