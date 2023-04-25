@@ -6,7 +6,7 @@
 - name: Download and extract frontend
   ansible.builtin.unarchive:
     src: https://github.com/stans-robot-project/frontend/archive/main.zip
-    dest: /temp
+    dest: /tmp
     remote_src: yes
 
 - name: Cleanup FOlder containt 
@@ -16,7 +16,7 @@
 
 - name: copy file frontend containt to nginx path 
   ansible.builtin.copy: 
-    src: /temp/frontend.main/static/
+    src: /tmp/frontend.main/static/
     dest: /usr/share/nginx/html
     remote_src: yes
 
