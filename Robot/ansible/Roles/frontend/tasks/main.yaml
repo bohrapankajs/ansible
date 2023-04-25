@@ -3,6 +3,11 @@
     name: nginx
     state: present 
 
+- name: cleanup of old content
+  ansible.builtin.file:
+    path: /tmp
+    state: absent
+
 - name: Download & Extract Frontend
   ansible.builtin.unarchive:
     src: https://github.com/stans-robot-project/frontend/archive/main.zip
