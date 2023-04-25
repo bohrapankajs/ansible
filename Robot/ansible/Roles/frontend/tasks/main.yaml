@@ -8,6 +8,10 @@
     path: /tmp
     state: absent
 
+- name: Prints two lines of messages, but only if there is an environment value set
+  ansible.builtin.debug:
+    msg: hi
+
 - name: Download & Extract Frontend
   ansible.builtin.unarchive:
     src: https://github.com/stans-robot-project/frontend/archive/main.zip
