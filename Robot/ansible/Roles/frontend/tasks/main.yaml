@@ -12,11 +12,18 @@
   ansible.builtin.debug:
     msg: hi
 
-- name: Download & Extract Frontend
+- name: Download and EEEExtract frontend 
   ansible.builtin.unarchive:
     src: https://github.com/stans-robot-project/frontend/archive/main.zip
     dest: /tmp 
-    remote_source: yes
+    remote_src: yes
+
+
+# - name: Download & Extract Frontend
+#   ansible.builtin.unarchive:
+#     src: https://github.com/stans-robot-project/frontend/archive/main.zip
+#     dest: /tmp 
+#     remote_source: yes
 
 - name: cleanup of old content
   ansible.builtin.file:
