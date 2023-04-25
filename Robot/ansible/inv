@@ -1,5 +1,8 @@
-[dev]
-3.82.240.175
+[frontend]
+frontend.robot.internal
 
-[prod]
-54.89.228.218
+[catalogue]
+catalogue.robot.internal
+
+[mongodb]
+mongodb.robot.internal
