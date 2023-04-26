@@ -30,20 +30,8 @@
 
 - name: load mongodb schema
   community.mongodb.mongodb_shell:
-    file: "/tmp/mongodb-main/catalogue.js"
+    file: "/tmp/mongodb-main/{{item}}.js"
     idempotent: yes
-
-
-- name: load mongodb schema
-  community.mongodb.mongodb_shell:
-    file: "/tmp/mongodb-main/users.js"
-    idempotent: yes
-
-- name: Run the listDatabases command
-  community.mongodb.mongodb_shell:
-    eval: "db.adminCommand('listDatabases')"
-    register: sanjay
-    
-- name: Printing Sanjay
-  ansible.builtin.debug: 
-    msg: "{{sanjay.stdout}}"
+  loop:
+    - catalogue
+    - users
