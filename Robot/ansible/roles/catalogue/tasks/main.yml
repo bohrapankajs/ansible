@@ -3,8 +3,11 @@
 
 - name: Installing Nodejs
   ansible.builtin.packge:
-    name: nodejs
+    name: "{{item}}"
     state: present
+  loop:
+      - nodejs
+      - gcc-c++
 
 - name: Add the user
   ansible.builtin.user:
