@@ -10,7 +10,7 @@
 
 - name: Installing mongodb-org  
   ansible.builtin.package:
-    name: redis-6.2.7  
+    name: redis-6.2.11  
     state: present 
 
 - name: Updating Redis Config
