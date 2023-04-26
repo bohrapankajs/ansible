@@ -2,5 +2,5 @@
   hosts: "{{COMPONENT}}"
   become: yes
   roles: 
-    - "{{COMPONENT}}""
+    - "{{COMPONENT}}"
 
