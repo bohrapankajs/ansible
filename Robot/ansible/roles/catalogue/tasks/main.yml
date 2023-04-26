@@ -2,7 +2,7 @@
   ansible.builtin.shell: curl --silent --location https://rpm.nodesource.com/setup_16.x | bash
 
 - name: Installing NodeJS 
-  ansible.builtin.packge:
+  ansible.builtin.package:
     name: "{{item}}"
     state: present
   loop:
