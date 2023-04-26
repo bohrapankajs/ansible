@@ -25,7 +25,7 @@
 - name: Download and extract
   ansible.builtin.include_role:
     name: common
-    tasks_from: Download
+    tasks_from: download
 
 - name: load mongodb schema
   community.mongodb.mongodb_shell:

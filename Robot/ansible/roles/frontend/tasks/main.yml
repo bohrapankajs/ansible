@@ -7,7 +7,7 @@
 - name: Download and extract
   ansible.builtin.include_role:
     name: common
-    tasks_from: Download
+    tasks_from: download
 
 - name: Performing frontend cleanup 
   ansible.builtin.file:
