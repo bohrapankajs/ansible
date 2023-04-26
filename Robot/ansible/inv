@@ -6,3 +6,9 @@ catalogue.robot.internal
 
 [mongodb]
 mongodb.robot.internal
+
+[redis]
+redis.robot.internal
+
+[user]
+user.robot.internal
