@@ -3,10 +3,9 @@
     name: nginx 
     state: present 
 
-
-- name: Download and extract
+- name: Download & Extracting {{COMPONENT}}
   ansible.builtin.include_role:
-    name: common
+    name: common 
     tasks_from: download
 
 - name: Performing frontend cleanup 
@@ -28,11 +27,12 @@
 # - name: Start nginx
 #   ansible.builtin.service:
 #     name: nginx
-#     state: restarted         
+#     state: started         
 #     enabled: yes
+
 
 - name: Restarting Service 
   ansible.builtin.systemd:
     state: restarted
     daemon_reload: true 
-    name: nginx
+    name: nginx 
