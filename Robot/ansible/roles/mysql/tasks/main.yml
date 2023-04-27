@@ -42,6 +42,12 @@
       register: DEFAULT_ROOT_PASSWORD  
 
 
+- name: Check password validate Plugin
+  ansible.builtin.shell: echo show plugin; | mysql -uroot -pRoboShop@1 | grep validate_password
+  register: PLUGIN_INFO
+  ignore_errors: true
+  
+
 
 
 
