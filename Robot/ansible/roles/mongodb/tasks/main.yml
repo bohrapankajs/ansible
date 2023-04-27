@@ -7,7 +7,7 @@
 
 - name: Installing {{COMPONENT}}-org  
   ansible.builtin.yum:
-    name: {{COMPONENT}}-org  
+    name: "{{COMPONENT}}-org"
     state: installed 
 
 - name: Updating {{COMPONENT}} Config
@@ -34,3 +34,6 @@
   loop:
     - catalogue
     - users
+
+- name: set hostname
+  ansible.builtin.shell: set-hostname {{COMPONENT}}

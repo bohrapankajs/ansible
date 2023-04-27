@@ -8,7 +8,7 @@
     dest: /etc/yum.repos.d/{{COMPONENT}}.repo
 
 
-- name: Installing {{COMPONENT}}-org  
+- name: Installing {{COMPONENT}}  
   ansible.builtin.package:
     name: "{{COMPONENT}}-6.2.11"
     state: present 
