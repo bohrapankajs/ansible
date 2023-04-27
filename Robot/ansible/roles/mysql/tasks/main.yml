@@ -1,0 +1,65 @@
+
+- name: copy mysql repo to destination
+  ansible.builtin.copy: 
+    src: mysql.repo
+    dest: /etc/yum.repos.d/{{COMPONENT}}.repo
+
+
+- name: Installing {{COMPONENT}}-org  
+  ansible.builtin.package:
+    name: 
+    - "{{COMPONENT}}-community-server"
+    - MySQL-python
+    state: installed 
+
+- name: Start {{COMPONENT}}
+  ansible.builtin.service:
+    name: mysqld
+    state: started         
+    enabled: yes
+
+# if this fails reset the password
+- name: Get MySQL version with non-default credentials
+  community.mysql.mysql_info:
+    login_user: root
+    login_password: RoboShop@1
+  ignore_errors: true
+  register: stat
+
+
+- name: Password Reset Block
+  when: stat.failed
+  block:
+    - name: fetch Mysql Default Password
+      ansible.builtin.shell: grep 'temporary_password' /var/log/mysqld.log | awk '{print $NF}'
+      register: DEF_ROOT_PASSWORD  
+    - name: copy Mysql Reset password
+      ansible.builtin.copy: 
+        src: root_password.sql
+        dest: /tmp/root_password.sql
+    - name: Reset Mysql Default Password
+      ansible.builtin.shell: mysql  --connect-expired-password  -uroot -p"{{DEF_ROOT_PASSWORD.stout}}" < /tmp/root_password.sql
+      register: DEFAULT_ROOT_PASSWORD  
+
+
+
+
+
+# - name: fetch Mysql Default Password
+#   ansible.builtin.shell: grep 'temporary_password' /var/log/mysqld.log | awk '{print $NF}'
+#   #grep 'A temporary password' /var/log/mysqld.log | awk -F ' ' '{print $NF}'
+#   register: DEF_ROOT_PASSWORD  
+#   when: stat.failed
+
+  
+# - name: copy Mysql Reset password
+#   ansible.builtin.copy: 
+#     src: root_password.sql
+#     dest: /tmp/root_password.sql
+#   when: stat.failed
+
+# - name: Reset Mysql Default Password
+#   ansible.builtin.shell: mysql  --connect-expired-password  -uroot -p"{{DEF_ROOT_PASSWORD.stout}}" < /tmp/root_password.sql
+#   register: DEFAULT_ROOT_PASSWORD  
+#   when: stat.failed
+
