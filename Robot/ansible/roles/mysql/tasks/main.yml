@@ -57,7 +57,18 @@
     - name: Copying Password validating commond line
       ansible.builtin.shell: mysql  --connect-expired-password  -uroot -pRoboShop@1 < /tmp/password_validation.mysql
 
+- name: Download and extract
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: download
 
+- name: load schema 
+  community.mysql.mysql_db:
+    state: import
+    name: all
+    target: /tmp/mysql-main/shipping.sql
+    login_user: root
+    login_password: RoboShop@1
 
 # - name: fetch Mysql Default Password
 #   ansible.builtin.shell: grep 'temporary_password' /var/log/mysqld.log | awk '{print $NF}'
