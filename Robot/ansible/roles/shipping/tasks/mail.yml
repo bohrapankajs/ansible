@@ -1,0 +1,9 @@
+- name: Set Hostname
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: sethostname 
+
+- name: Creating Shipping Components
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: maven
