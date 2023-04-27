@@ -1,21 +1,20 @@
-- name: set hostname
-  ansible.builtin.shell: set-hostname {{COMPONENT}}
+- name: Set hostname
+  ansible.builtin.include_role:
+    name: common 
+    tasks_from: sethostname
 
-- name: Configure yum repo
-  ansible.builtin.shell: curl --silent --location https://rpm.nodesource.com/setup_16.x | bash
+- name: Install Nodjs
+  ansible.builtin.include_role:
+    name: common 
+    tasks_from: nodejs
 
-- name: Installing NodeJS 
-  ansible.builtin.package:
-    name: "{{item}}"
-    state: present
-  loop:
-      - nodejs
-      - gcc-c++
 
-- name: Add the user
-  ansible.builtin.user:
-    name: roboshop
-    comment: roboshop project app user
+- name: Create Roboshop user account
+  ansible.builtin.include_role:
+    name: common 
+    tasks_from: create
+
+
 
 
 - name: Download and extract

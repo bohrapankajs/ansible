@@ -1,5 +1,7 @@
-- name: set hostname
-  ansible.builtin.shell: set-hostname {{COMPONENT}}
+- name: Set hostname
+  ansible.builtin.include_role:
+    name: common 
+    tasks_from: sethostname
 
 
 - name: Copy redis repo 
