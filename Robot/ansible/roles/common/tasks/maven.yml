@@ -1,7 +1,8 @@
-- name: Installing NodeJS 
+- name: Installing MAVEN 
   ansible.builtin.package:
     name: maven 
     state: present
+
 
 
 
