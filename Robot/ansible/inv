@@ -12,3 +12,20 @@ redis.robot.internal
 
 [user]
 user.robot.internal
+
+
+[cart]
+cart.robot.internal
+
+[rebbitmq]
+rebbitmq.robot.internal
+
+[payment]
+payment.robot.internal
+
+
+[shipping]
+shipping.robot.internal
+
+[mysql]
+mysql.robot.internal

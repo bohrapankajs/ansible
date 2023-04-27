@@ -2,21 +2,21 @@
 - name: copy MongoDB repo to destination
   ansible.builtin.copy: 
     src: mongo.repo
-    dest: /etc/yum.repos.d/mongodb.repo
+    dest: /etc/yum.repos.d/{{COMPONENT}}.repo
 
 
-- name: Installing mongodb-org  
+- name: Installing {{COMPONENT}}-org  
   ansible.builtin.yum:
-    name: mongodb-org  
+    name: {{COMPONENT}}-org  
     state: installed 
 
-- name: Updating MongoDB Config
+- name: Updating {{COMPONENT}} Config
   ansible.builtin.replace:
-    path: /etc/mongod.conf
+    path: /etc/{{COMPONENT}}.conf
     regexp: '127.0.0.1'
     replace: '0.0.0.0'
 
-- name: Start MongoD
+- name: Start {{COMPONENT}}
   ansible.builtin.service:
     name: mongod
     state: started         
@@ -27,9 +27,9 @@
     name: common
     tasks_from: download
 
-- name: load mongodb schema
+- name: load {{COMPONENT}} schema
   community.mongodb.mongodb_shell:
-    file: "/tmp/mongodb-main/{{item}}.js"
+    file: "/tmp/{{COMPONENT}}-main/{{item}}.js"
     idempotent: yes
   loop:
     - catalogue
