@@ -42,6 +42,6 @@
 - name: Configure services
   ansible.builtin.include_role:
     name: common
-    tasks_from: configuringservice.yml
+    tasks_from: configuringservice
 
 
