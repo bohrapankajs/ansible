@@ -17,8 +17,8 @@ user.robot.internal
 [cart]
 cart.robot.internal
 
-[rebbitmq]
-rebbitmq.robot.internal
+[rabbitmq]
+rabbitmq.robot.internal
 
 [payment]
 payment.robot.internal
