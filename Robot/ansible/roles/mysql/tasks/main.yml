@@ -5,8 +5,8 @@
     dest: /etc/yum.repos.d/{{COMPONENT}}.repo
 
 
-- name: Installing {{COMPONENT}}-org  
-  ansible.builtin.package:
+- name: Installing {{COMPONENT}}  
+  ansible.builtin.yum:
     name: 
     - "{{COMPONENT}}-community-server"
     - MySQL-python
