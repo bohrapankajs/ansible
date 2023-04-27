@@ -53,9 +53,9 @@
     - name: Copying Password validating commond line
       ansible.builtin.copy: 
         src: password_validation.mysql
-        dest: /tmp/password_validation.repo
+        dest: /tmp/password_validation.mysql
     - name: Copying Password validating commond line
-      ansible.builtin.shell: mysql  --connect-expired-password  -uroot -pRoboShop@1 < /tmp/password_validation.repo
+      ansible.builtin.shell: mysql  --connect-expired-password  -uroot -pRoboShop@1 < /tmp/password_validation.mysql
 
 
 
