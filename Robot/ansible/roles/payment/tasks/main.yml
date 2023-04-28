@@ -35,7 +35,7 @@
 
 - name: Install requrement, using the 'pip3' executable
   ansible.builtin.pip:
-    name: /home/roboshop/{{COMPONENT}}/requirements.txt
+    requirements: /home/roboshop/{{COMPONENT}}/requirements.txt
     executable: pip3
 
 
@@ -46,7 +46,17 @@
 #    - sed -i -e "/^uid/ c uid=$USERID"  -e "/^gid/ c gid=$GROUPID" /home/$APPUSER/$COMPONENT/$COMPONENT.ini
 #   become_user: roboshop
 
+- name: Ensure SELinux is set to enforcing mode
+  ansible.builtin.lineinfile:
+    path: /home/$APPUSER/$COMPONENT/$COMPONENT.ini
+    regexp: '^uid'
+    line: uid = {{APP_USER_INFO.uid}}
 
+- name: Ensure SELinux is set to enforcing mode
+  ansible.builtin.lineinfile:
+    path: /home/$APPUSER/$COMPONENT/$COMPONENT.ini
+    regexp: '^gid'
+    line: gid = {{APP_USER_INFO.group}}
 
 
 # - name: Updating {{COMPONENT}} Config
