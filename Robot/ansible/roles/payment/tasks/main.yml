@@ -44,12 +44,12 @@
     chdir: 
   become_user: roboshop
 
-- name: Payment ini file change
-  ansible.builtin.shell: 
-   - USERID=$(id -u roboshop)
-   - GROUPID=$(id -g roboshop)
-   - sed -i -e "/^uid/ c uid=$USERID"  -e "/^gid/ c gid=$GROUPID" /home/$APPUSER/$COMPONENT/$COMPONENT.ini
-  become_user: roboshop
+# - name: Payment ini file change
+#   ansible.builtin.shell: 
+#    - USERID=$(id -u roboshop)
+#    - GROUPID=$(id -g roboshop)
+#    - sed -i -e "/^uid/ c uid=$USERID"  -e "/^gid/ c gid=$GROUPID" /home/$APPUSER/$COMPONENT/$COMPONENT.ini
+#   become_user: roboshop
 
 
 
