@@ -48,7 +48,7 @@
 
 - name: Chaning UID
   ansible.builtin.lineinfile:
-    path: /home/roboshop/{{payment}}/{{payment}}.ini
+    path: /home/roboshop/{{COMPONENT}}/{{COMPONENT}}.ini
     regexp: '^uid'
     line: uid = {{APP_USER_INFO.uid}}
 
