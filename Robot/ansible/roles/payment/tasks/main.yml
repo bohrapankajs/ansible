@@ -32,10 +32,16 @@
     remote_src: yes
   become_user: roboshop
 
+
+- name: Install requrement, using the 'pip3' executable
+  ansible.builtin.pip:
+    name: /home/roboshop/{{COMPONENT}}/requirements.txt
+    executable: pip3
+
 - name: Creating the package
-  ansible.builtin.shell: pip3 install -r requirements.txt  
+  ansible.builtin.shell: pip3 install -r   
   args:
-    chdir: /home/roboshop/{{COMPONENT}}
+    chdir: 
   become_user: roboshop
 
 - name: Payment ini file change
