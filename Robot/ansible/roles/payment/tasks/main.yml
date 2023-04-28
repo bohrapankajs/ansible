@@ -46,15 +46,15 @@
 #    - sed -i -e "/^uid/ c uid=$USERID"  -e "/^gid/ c gid=$GROUPID" /home/$APPUSER/$COMPONENT/$COMPONENT.ini
 #   become_user: roboshop
 
-- name: Ensure SELinux is set to enforcing mode
+- name: Chaning UID
   ansible.builtin.lineinfile:
-    path: /home/$APPUSER/$COMPONENT/$COMPONENT.ini
+    path: /home/roboshop/{{payment}}/{{payment}}.ini
     regexp: '^uid'
     line: uid = {{APP_USER_INFO.uid}}
 
-- name: Ensure SELinux is set to enforcing mode
+- name: chaning GID
   ansible.builtin.lineinfile:
-    path: /home/$APPUSER/$COMPONENT/$COMPONENT.ini
+    path: /home/roboshop/{{COMPONENT}}/{{COMPONENT}}.ini
     regexp: '^gid'
     line: gid = {{APP_USER_INFO.group}}
 
