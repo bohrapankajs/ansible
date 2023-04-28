@@ -1,11 +1,11 @@
 
 - name: Installing python 3 
-  ansible.builtin.yum:
+  ansible.builtin.package:
     name: 
         - python36
         - gcc 
         - python3-devel
-    state: installed   
+    state: present   
 
 
 - name: create roboshop user account
