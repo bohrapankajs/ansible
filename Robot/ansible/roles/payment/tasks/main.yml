@@ -1,7 +1,7 @@
 
 - name: Installing MySQL 
   ansible.builtin.yum:
-    name: {{item}}
+    name: "{{item}}"
     state: installed   
   loop:
     - python36
