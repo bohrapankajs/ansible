@@ -1,12 +1,12 @@
 
-- name: Installing MySQL 
+- name: Installing python 3 
   ansible.builtin.yum:
-    name: "{{item}}"
+    name: 
+        - python36
+        - gcc 
+        - python3-devel
     state: installed   
-  loop:
-    - python36
-    - gcc 
-    - python3-devel
+
 
 - name: create roboshop user account
   ansible.builtin.include_role:
