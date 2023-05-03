@@ -1,6 +1,6 @@
-- name: configure roboshop project
-  hosts: "{{COMPONENT}}"
+- name: Configure Roboshop Project 
+  hosts: "{{COMPONENT}}" 
   become: yes
-  roles: 
+  roles:
     - "{{COMPONENT}}"
 
