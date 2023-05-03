@@ -12,7 +12,7 @@
 
 - name: Updating {{COMPONENT}} Config
   ansible.builtin.replace:
-    path: /etc/{{COMPONENT}}.conf
+    path: /etc/mongod.conf
     regexp: '127.0.0.1'
     replace: '0.0.0.0'
 
