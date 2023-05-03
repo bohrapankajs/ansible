@@ -12,17 +12,20 @@
   ansible.builtin.file:
     path: /usr/share/nginx/html
     state: absent 
+  notify: Restarting nginx 
 
 - name: Copying frontend code
   ansible.builtin.copy:
     src: /tmp/frontend-main/static/
     dest: /usr/share/nginx/html
     remote_src: yes  
+  
 
 - name: Copying Roboshop Proxy Config 
-  ansible.builtin.copy:
+  ansible.builtin.template:
     src: roboshop.conf
     dest: /etc/nginx/default.d/roboshop.conf
+  notify: Restarting nginx 
 
 # - name: Start nginx
 #   ansible.builtin.service:
@@ -31,12 +34,6 @@
 #     enabled: yes
 
 
-- name: Restarting Service 
-  ansible.builtin.systemd:
-    state: restarted
-    daemon_reload: true 
-    name: nginx 
-    enabled: yes
 
 
 - name: Set hostname
