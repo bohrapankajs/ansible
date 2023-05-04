@@ -3,6 +3,7 @@
     name: common
     tasks_from: sethostname 
 
+# just to test main branch and other branch
 
 - name: Configuring {{COMPONENT}}
   ansible.builtin.include_role:
