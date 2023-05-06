@@ -3,7 +3,7 @@ pipeline {
     environment {
         ENV_URL = "Google.com"
         ACCESS_KEY = credentials('AWS_ACCESS_KEY')
-        SSH_CRED = credentials('SSH-CRED')
+        SSH_CRED = credentials('SSH_CRED')
     }
     stages {
         stage("Stage One") {
