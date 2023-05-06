@@ -14,6 +14,7 @@ pipeline {
         stage("Stage One") {
             steps {
                 sh "echo One"
+                sh "sleep 10"
             }
         }
         stage("Stage Two") {
@@ -21,7 +22,8 @@ pipeline {
                 sh "echo Two"
                 sh "echo ENV_URL is ${ENV_URL}"
                 sh "echo  AWS_ACCESS_KEY is ${ ACCESS_KEY}"
-                  sh "echo  SSH_CRED is ${ SSH_CRED}"
+                sh "echo  SSH_CRED is ${ SSH_CRED}"
+                
             }
         }
         stage("Stage Three") {
