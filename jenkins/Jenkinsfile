@@ -21,7 +21,7 @@ pipeline {
         stage("Stage One") {
             steps {
                 sh "echo One"
-                sh "sleep 100"
+                sh "sleep 10"
             }
         }
         stage("Stage Two") {
