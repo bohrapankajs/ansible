@@ -23,36 +23,39 @@ pipeline {
         maven 'maven-3.5.0'
     }
     stages {
-        stage("Stage One") {
-            steps {
-                sh "echo One"
-                sh "sleep 10"
-                sh 'mvn --version'
+         stage('Parallel Stage') {
+            parallel {
+                stage("Stage One") {
+                    steps {
+                        sh "echo One"
+                        sh "sleep 10"
+                        sh 'mvn --version'
 
-            }
-        }
-        stage("Stage Two") {
-            steps {
-                sh "echo Two"
-                sh "echo ENV_URL is ${ENV_URL}"
-                sh "echo  AWS_ACCESS_KEY is ${ ACCESS_KEY}"
-                sh "echo  SSH_CRED is ${ SSH_CRED}"
-                
-            }
-        }
+                    }
+                }
+                stage("Stage Two") {
+                    steps {
+                        sh "echo Two"
+                        sh "echo ENV_URL is ${ENV_URL}"
+                        sh "echo  AWS_ACCESS_KEY is ${ ACCESS_KEY}"
+                        sh "echo  SSH_CRED is ${ SSH_CRED}"
+                        
+                    }
+                }
 
-        stage("Stage Three") {
-            environment {
-                ENV_URL = "New.Google.com.vom"
-            }
-            steps {
-               sh '''   echo aws
-                        mvn --version
-                        echo DevOps
-                        echo Bash
-                        echo ENV_URL is ${ENV_URL}
-                '''
-            }
+                stage("Stage Three") {
+                    environment {
+                        ENV_URL = "New.Google.com.vom"
+                    }
+                    steps {
+                    sh '''   echo aws
+                                echo DevOps
+                                echo Bash
+                                echo ENV_URL is ${ENV_URL}
+                        '''
+                    }
+                }
+            }   
         }
     }
 }
