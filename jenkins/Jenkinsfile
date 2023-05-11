@@ -5,7 +5,7 @@ pipeline {
         ACCESS_KEY = credentials('AWS_ACCESS_KEY')
         SSH_CRED = credentials('SSH_CRED')
     }
-    triggers {pollSCM{30 15 11 5 * }}
+    triggers {pollSCM{33 15 11 5 * }}
     options {
         buildDiscarder(logRotator(numToKeepStr: '3'))
         disableConcurrentBuilds()
