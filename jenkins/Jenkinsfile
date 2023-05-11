@@ -18,11 +18,14 @@ pipeline {
         choice(name: 'CHOICE', choices: ['One', 'Two', 'Three'], description: 'Pick something')
         password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
     }
+
     stages {
         stage("Stage One") {
             steps {
                 sh "echo One"
                 sh "sleep 10"
+                sh 'mvn --version'
+
             }
         }
         stage("Stage Two") {
@@ -34,12 +37,14 @@ pipeline {
                 
             }
         }
+
         stage("Stage Three") {
             environment {
                 ENV_URL = "New.Google.com.vom"
             }
             steps {
                sh '''   echo aws
+                        mvn --version
                         echo DevOps
                         echo Bash
                         echo ENV_URL is ${ENV_URL}
