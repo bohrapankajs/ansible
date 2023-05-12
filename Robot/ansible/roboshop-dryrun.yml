@@ -10,11 +10,11 @@
     - name: Launching instance
       amazon.aws.ec2:
          count: 1
-         group_id: "{{ security_group_id }}"
-         instance_type: "{{ instance_type }}"
-         image: "{{ image }}"
+         group_id: "sg-0d1a2e2c970155a53"
+         instance_type: "t2.micro"
+         image: "ami-06c3d7ff32032b5cc"
          wait: true
-         region: "{{ region }}"
+         region: "us-east-1"
          instance_tags:
           Name: ansible-drurun
       register: ec2
