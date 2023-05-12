@@ -1,11 +1,11 @@
 pipeline {
-     agent { label 'SHELL' } 
+     agent any 
     environment {
         ENV_URL = "Google.com"
         ACCESS_KEY = credentials('AWS_ACCESS_KEY')
         SSH_CRED = credentials('SSH_CRED')
     }
-    triggers { pollSCM('H/10 * * * *') } 
+    // triggers { pollSCM('H/10 * * * *') } 
     options {
         buildDiscarder(logRotator(numToKeepStr: '3'))
         disableConcurrentBuilds()
@@ -18,10 +18,10 @@ pipeline {
     //     choice(name: 'CHOICE', choices: ['One', 'Two', 'Three'], description: 'Pick something')
     //     password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
     // }
-    tools {
+    // tools {
 
-        maven 'maven-3.5.0'
-    }
+    //     // maven 'maven-3.5.0'
+    // }
     stages {
          stage('Parallel Stage') {
             parallel {
@@ -29,7 +29,7 @@ pipeline {
                     steps {
                         sh "echo One"
                         
-                        sh 'mvn --version'
+                        // sh 'mvn --version'
                         sh 'hostname'
                         sh "sleep 10"
 
