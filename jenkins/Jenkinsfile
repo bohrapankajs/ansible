@@ -28,9 +28,10 @@ pipeline {
                 stage("Stage One") {
                     steps {
                         sh "echo One"
-                        sh "sleep 10"
+                        
                         sh 'mvn --version'
                         sh 'hostname'
+                        sh "sleep 10"
 
                     }
                 }
