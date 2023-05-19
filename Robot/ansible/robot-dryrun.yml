@@ -9,8 +9,8 @@
   tasks:
     - name: Launching instance
       amazon.aws.ec2:
-        aws_access_key: "XX"
-        aws_secret_key: "XX"
+        # aws_access_key: "{{aws_access_key}}"
+        # aws_secret_key: "{{aws_secret_key}}"
         count: 1
         group_id: "{{ security_group_id }}"
         instance_type: "{{ instance_type }}"
