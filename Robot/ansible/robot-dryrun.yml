@@ -9,13 +9,15 @@
   tasks:
     - name: Launching instance
       amazon.aws.ec2:
-         count: 1
-         group_id: "{{ security_group_id }}"
-         instance_type: "{{ instance_type }}"
-         image: "{{ image }}"
-         wait: true
-         region: "{{ region }}"
-         instance_tags:
+        aws_access_key: "AKIARHGLVPFH5GXWY547"
+        aws_secret_key: "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"
+        count: 1
+        group_id: "{{ security_group_id }}"
+        instance_type: "{{ instance_type }}"
+        image: "{{ image }}"
+        wait: true
+        region: "{{ region }}"
+        instance_tags:
           Name: ansible-drurun
       register: ec2
 
