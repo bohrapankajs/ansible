@@ -3,7 +3,6 @@ pipeline {
     
     environment {
         SSH_CRED = credentials('SSH_CRED')
-        IAM_Cred = credentials('IAM-Cred')
     }
     stages {
         stage('Performing LinkCheck') {
@@ -16,7 +15,7 @@ pipeline {
         stage('Performing Ansible DryRun') {
             steps {
                 sh "echo This should be only run from PR banch"
-                sh "ansible-playbook robot-dryrun.yml -e ansible_user=$(SSH_CRED_USER) -e ansible_password=$(SSH_CRED_PSW) -e COMPONENT=mongodb -e ENV=dev -e aws_access_key=$(IAM_Cred_USER) -e aws_secret_key=$(IAM_Cred_PSW)"
+                sh "ansible-playbook robot-dryrun.yml -e ansible_user=$(SSH_CRED_USER) -e ansible_password=$(SSH_CRED_PSW) -e COMPONENT=mongodb -e ENV=dev"
                 
             }
         }
