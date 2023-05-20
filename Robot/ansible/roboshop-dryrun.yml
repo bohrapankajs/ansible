@@ -16,7 +16,7 @@
          wait: true
          region: "{{ region }}"
          instance_tags:
-          Name: ansible-drurun
+          Name: ansible-dryrun
       register: ec2
 
     - name: Adding instance to the host group
