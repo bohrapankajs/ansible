@@ -7,24 +7,24 @@ pipeline {
     stages {
         stage('Performing LinkCheck') {
             steps {
-                sh "env"
-                sh "echo This should only be run against Feature branch only"
-                sh "echo Linkcheck completed"
-            }
-        }
-        stage('Performing Ansible DryRun') {
-            steps {
-                sh "echo This should be only run from PR banch"
+        //         sh "env"
+        //         sh "echo This should only be run against Feature branch only"
+        //         sh "echo Linkcheck completed"
+        //     }
+        // }
+        // stage('Performing Ansible DryRun') {
+        //     steps {
+        //         sh "echo This should be only run from PR banch"
                 sh "ansible-playbook robot-dryrun.yml -e ansible_user=centos -e ansible_password=DevOps321 -e COMPONENT=mongodb -e ENV=dev"
                 
             }
         }
-        stage('Performing Merge') {
-            steps {
-                sh "echo This should be only run from Main branch banch"
-                sh "echo Performing Merge"
-                sh "echo merge completed completed"
-            }
+        // stage('Performing Merge') {
+        //     steps {
+        //         sh "echo This should be only run from Main branch banch"
+        //         sh "echo Performing Merge"
+        //         sh "echo merge completed completed"
+        //     }
         }
     }   
-} 
+// } 
