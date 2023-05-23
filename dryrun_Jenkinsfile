@@ -6,6 +6,7 @@ pipeline {
     }
     stages {
         stage('Performing LinkCheck') {
+            when { branch pattern: "feature.*", comparator: "REGEXP"} 
             steps {
                 sh "env"
                 sh "echo This should only be run against Feature branch only"
@@ -13,6 +14,7 @@ pipeline {
             }
         }
         stage('Performing Ansible DryRun') {
+            when { branch pattern: "PR-.*", comparator: "REGEXP"}
             steps {
                 sh "echo This should be only run from PR banch"
                 // sh "ansible-playbook robot-dryrun.yml -e COMPONENT=mongodb -e ENV=dev -e ansible_user=${SSH_CRED_USER} -e ansible_password=${SSH_CRED_PSW}"
@@ -20,6 +22,7 @@ pipeline {
             }
         }
         stage('Performing Merge') {
+            when { branch 'main' }
             steps {
                 sh "echo This should be only run from Main branch banch"
                 sh "echo Performing Merge"
