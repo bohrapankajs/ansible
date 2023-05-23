@@ -1,9 +1,9 @@
 pipeline {
      agent any 
     // all done wow
-    environment {
-        SSH_CRED = credentials('SSH_CRED')
-    }
+    // environment {
+    //     SSH_CRED = credentials('SSH_CRED')
+    // }
     stages {
         stage('Performing LinkCheck') {
             when { branch pattern: "feature.*", comparator: "REGEXP"} 
@@ -16,6 +16,7 @@ pipeline {
         stage('Performing Ansible DryRun') {
             when { branch pattern: "PR-.*", comparator: "REGEXP"}
             steps {
+                sh "env"
                 sh "echo This should be only run from PR banch"
                 // sh "ansible-playbook robot-dryrun.yml -e COMPONENT=mongodb -e ENV=dev -e ansible_user=${SSH_CRED_USER} -e ansible_password=${SSH_CRED_PSW}"
                 sh "echo Brach created and tested and deleted"
@@ -24,6 +25,7 @@ pipeline {
         stage('Performing Merge') {
             when { branch 'main' }
             steps {
+                sh "env"
                 sh "echo This should be only run from Main branch banch"
                 sh "echo Performing Merge"
                 sh "echo merge completed completed"
