@@ -22,7 +22,7 @@ pipeline {
             }
         }
         stage('Performing Merge') {
-            when { expression { env.TAG_NAME != null } }
+            when { expression { TAG_NAME ==~ ".*" } }
             steps {
                 sh "echo This should be only run from Main branch banch"
                 sh "echo Performing Merge"
