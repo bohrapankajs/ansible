@@ -1,9 +1,9 @@
 pipeline {
      agent any 
     // all done wow
-    environment {
-        SSH_CRED = credentials('SSH_CRED')
-    }
+    // environment {
+    //     SSH_CRED = credentials('SSH_CRED')
+    // }
     stages {
         stage('Performing LinkCheck') {
             when { branch pattern: "feature.*", comparator: "REGEXP"} 
