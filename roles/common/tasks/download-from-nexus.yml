@@ -8,7 +8,7 @@
   ansible.builtin.file:
     path: "{{APP_LOCATION}}"
     state: directory
-  become_user: "{{APPUSER}}"
+  become_user: roboshop
   ignore_errors: true
 
 - name: Download and extraing {{COMPONENT}} 
@@ -16,6 +16,6 @@
     src: http://172.31.92.32:8081/repository/{{COMPONENT}}/{{COMPONENT}}-{{APP_VERSION}}.zip
     dest: "{{APP_LOCATION}}"
     remote_src: yes  # If the source is not local , you need to mention remote soruce as yes. 
-  become_user: "{{APPUSER}}"
+  become_user: roboshop
 
 
