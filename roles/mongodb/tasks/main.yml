@@ -9,6 +9,7 @@
   ansible.builtin.yum:
     name: "{{COMPONENT}}-org"
     state: installed 
+    lock_timeout: 180
 
 - name: Updating {{COMPONENT}} Config
   ansible.builtin.replace:
