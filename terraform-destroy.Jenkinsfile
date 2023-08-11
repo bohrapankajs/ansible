@@ -87,7 +87,7 @@ pipeline {
 
         stage('Terraform Destroy Databses') {
             steps {
-                git branch: 'main', url: 'https://github.com/b51-clouddevops/terraform-databases.git'
+                git branch: 'main', url: 'https://github.com/bohrapankajs/terrform-databases.git'
                 sh "terrafile -f env-${ENV}/Terrafile"
                 sh "terraform init --backend-config=env-${ENV}/${ENV}-backend.tfvars -reconfigure"
                 sh "terraform plan -var-file=env-${ENV}/${ENV}.tfvars"
@@ -107,7 +107,7 @@ pipeline {
 
         stage('Terraform Destroy Network') {
             steps {
-                git branch: 'main', url: 'https://github.com/b51-clouddevops/terraform-vpc.git'
+                git branch: 'main', url: 'https://github.com/bohrapankajs/terraform-vpc.git'
                 sh "terrafile -f env-${ENV}/Terrafile"
                 sh "terraform init --backend-config=env-${ENV}/${ENV}-backend.tfvars -reconfigure -reconfigure"
                 sh "terraform plan -var-file=env-${ENV}/${ENV}.tfvars"
