@@ -27,15 +27,15 @@ pipeline {
             }
         }
         
-        // stage('Terraform Create ALB') {
-        //     steps {
-        //         git branch: 'main', url: 'https://github.com/b51-clouddevops/terraform-loadbalancers.git'
-        //         sh "terrafile -f env-${ENV}/Terrafile"
-        //         sh "terraform init --backend-config=env-${ENV}/${ENV}-backend.tfvars -reconfigure"
-        //         sh "terraform plan -var-file=env-${ENV}/${ENV}.tfvars"
-        //         sh "terraform apply -var-file=env-${ENV}/${ENV}.tfvars -auto-approve"
-        //     }
-        // }
+        stage('Terraform Create ALB') {
+            steps {
+                git branch: 'main', url: 'https://github.com/bohrapankajs/terrform-loadbalancers.git'
+                sh "terrafile -f env-${ENV}/Terrafile"
+                sh "terraform init --backend-config=env-${ENV}/${ENV}-backend.tfvars -reconfigure"
+                sh "terraform plan -var-file=env-${ENV}/${ENV}.tfvars"
+                sh "terraform apply -var-file=env-${ENV}/${ENV}.tfvars -auto-approve"
+            }
+        }
         //  stage('Backend') {
         //     parallel {
         //        stage('Creating-User') {
